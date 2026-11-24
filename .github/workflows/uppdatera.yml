@@ -1,0 +1,41 @@
+name: Uppdatera nyheter
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"   # var 30:e minut (UTC)
+  workflow_dispatch:          # kör manuellt från fliken Actions
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  bygg:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install feedparser==6.0.11
+      - run: python scripts/fetch_news.py --sources sources.json --out site/news.json
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  publicera:
+    needs: bygg
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
