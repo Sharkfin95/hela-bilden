@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hela bilden</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&display=swap" rel="stylesheet">
+<style>
+/* VOICE: lugn och exakt, som en stor tidnings grafikredaktion – ett verktyg, inte en affisch.
+   IDEA: en förstasida där varje nyhet bär sin egen täckningsstapel, från rött till blått.
+   PICTURE: toppnyhetens ”Vem rapporterar?”-remsa – alla källor i ordning vänster→höger, ifyllda om de skrivit.
+   COLOUR and TYPE: vit botten, svart masthuvud, rött = vänster, grått = mitten, blått = höger; Newsreader för rubriker, Libre Franklin för allt annat.
+   LAYOUT: masthuvud med flikar, toppnyhet med jämförelse, rutnät av nyheter, enkällsnyheter som kompakt lista. */
+:root{color-scheme:light dark;
+--bg:light-dark(#ffffff,#121417);--ink:light-dark(#121417,#ecebe8);--muted:light-dark(#585d64,#a5a9af);
+--line:light-dark(#e2e0db,#2b2f35);--panel:light-dark(#f4f4f2,#1a1d22);--mast:#121417;--mastink:#f4f3f0;
+--v:light-dark(#c4122f,#f2576d);--m:light-dark(#8f8a80,#8e9196);--h:light-dark(#1d4f91,#6d9fe9);
+--vt:light-dark(#fbe7ea,#3a1a20);--mt:light-dark(#efeeeb,#25282d);--ht:light-dark(#e5edf8,#18263a);
+--serif:"Newsreader",Georgia,"Times New Roman",serif;--sans:"Libre Franklin",system-ui,-apple-system,"Segoe UI",sans-serif}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 var(--sans);overflow-x:clip}
+a{color:inherit}
+.wrap{max-width:1240px;margin:0 auto;padding:0 max(4vw,16px)}
+header{background:var(--mast);color:var(--mastink)}
+.mast{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 18px;padding-top:22px}
+.mast h1{font:700 clamp(32px,5vw,44px)/1.05 var(--serif);margin:0;letter-spacing:-.01em}
+.mast p{margin:0;color:#c9c8c3;font-size:15px}
+.mast .date{margin-left:auto;font-size:14px;color:#c9c8c3}
+nav{display:flex;gap:4px;overflow-x:auto;margin-top:14px}
+nav a{flex:none;padding:12px 14px 13px;text-decoration:none;font-weight:600;font-size:15px;color:#c9c8c3;border-bottom:3px solid transparent}
+nav a[aria-current=page]{color:#fff;border-color:#fff}
+nav a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid var(--h);outline-offset:2px}
+.note{background:var(--panel);border-bottom:1px solid var(--line);font-size:14px;color:var(--muted)}
+.note .wrap{padding-block:10px}
+main.wrap{padding-top:28px;padding-bottom:64px}
+.view[hidden]{display:none}
+h2{font:600 28px/1.15 var(--serif);margin:0 0 6px;text-wrap:balance}
+h3{font:600 22px/1.2 var(--serif);margin:0;text-wrap:balance}
+.muted{color:var(--muted)}
+.meta{font-size:14px;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 12px}
+/* fördelningsstapel */
+.bar{display:flex;height:30px;border-radius:4px;overflow:hidden;background:var(--mt);margin:12px 0 6px}
+.bar span{display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden}
+.bar .v{background:var(--v)}.bar .m{background:var(--m)}.bar .h{background:var(--h)}
+.legend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:13px;color:var(--muted)}
+.legend b{font-weight:600;color:var(--ink)}
+.dot{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.dot.v{background:var(--v)}.dot.m{background:var(--m)}.dot.h{background:var(--h)}
+/* toppnyhet */
+.lead{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:20px 40px;padding-bottom:28px;border-bottom:2px solid var(--ink);margin-bottom:28px}
+.lead h2{font-size:clamp(30px,4vw,46px);line-height:1.05;margin:6px 0 12px}
+.lead .sum{font-size:17px;max-width:62ch;margin:0 0 6px}
+.kicker{font-size:13px;font-weight:700;color:var(--v);letter-spacing:.02em}
+.strip h4{margin:0 0 8px;font-size:15px}
+.cells{display:flex;flex-wrap:wrap;gap:6px}
+.cell{flex:1 1 80px;max-width:120px;min-height:48px;border-radius:4px;padding:6px 6px 5px;font-size:12px;line-height:1.2;font-weight:600;border:2px solid var(--c);color:var(--c);background:transparent;display:flex;flex-direction:column;justify-content:space-between}
+.cell.on{background:var(--c);color:#fff}
+.cell.off{opacity:.55}
+.cell.na{border-style:dashed;opacity:.4}
+.cell small{font-weight:500;font-size:11px}
+.cell.v{--c:var(--v)}.cell.m{--c:var(--m)}.cell.h{--c:var(--h)}
+.striplab{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:6px}
+.compare{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.col{border-top:4px solid var(--c);padding-top:10px}
+.col.v{--c:var(--v)}.col.m{--c:var(--m)}.col.h{--c:var(--h)}
+.col h5{margin:0 0 8px;font-size:14px;color:var(--c)}
+.col ul{list-style:none;margin:0;padding:0}
+.col li{padding:8px 0;border-bottom:1px solid var(--line)}
+.col li a{font:500 17px/1.3 var(--serif);text-decoration:none}
+.col li a:hover{text-decoration:underline}
+.col .src{display:block;font-size:12px;color:var(--muted);margin-top:3px}
+.col .none{font-size:14px;color:var(--muted);padding:8px 0}
+/* verktygsrad */
+.tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:20px}
+.tools input{flex:1 1 240px;font:16px var(--sans);padding:10px 12px;min-height:44px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:600 14px var(--sans);min-height:44px;padding:0 14px;border-radius:22px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.chip[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+/* kort */
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 40px}
+.card{padding-bottom:22px;border-bottom:1px solid var(--line)}
+.card .sum{margin:6px 0 0;font-size:16px}
+.srcs{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+.tag{font-size:12px;font-weight:600;padding:2px 7px;border-radius:3px;background:var(--t);color:var(--c);white-space:nowrap}
+.singles li .tag{flex:none}
+.tag.v{--t:var(--vt);--c:var(--v)}.tag.m{--t:var(--mt);--c:var(--muted)}.tag.h{--t:var(--ht);--c:var(--h)}
+details{margin-top:10px}
+summary{cursor:pointer;font-weight:600;font-size:14px;min-height:44px;display:flex;align-items:center}
+summary{list-style:none}summary::-webkit-details-marker{display:none}
+summary::before{content:'▸';margin-right:8px;font-size:12px}details[open]>summary::before{content:'▾'}
+details .compare{margin-top:4px}
+.leadcmp{grid-column:1/-1;margin-top:0}
+.singles{margin-top:44px}
+.singles ul{list-style:none;padding:0;margin:12px 0 0;columns:2 340px;column-gap:40px}
+.singles li{break-inside:avoid;padding:8px 0;border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:baseline}
+.singles li a{font:500 16px/1.3 var(--serif);text-decoration:none}
+.empty{padding:28px;background:var(--panel);border-radius:6px;color:var(--muted)}
+/* blinda fläckar */
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 40px;margin-top:20px}
+.two>section>h3{padding-bottom:8px;border-bottom:4px solid var(--c);margin-bottom:12px}
+.two .v{--c:var(--v)}.two .h{--c:var(--h)}
+/* källor */
+.intro{max-width:70ch;margin:0 0 20px}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th{white-space:nowrap;text-align:left;font-size:13px;color:var(--muted);font-weight:600;padding:8px 10px;border-bottom:2px solid var(--ink)}
+td{padding:12px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+td b{display:block}
+.scale{display:flex;gap:3px;align-items:center}
+.scale i{width:14px;height:14px;border-radius:50%;border:2px solid var(--line)}
+.scale i.on{border-color:transparent;background:var(--c)}
+select{font:15px var(--sans);min-height:44px;padding:0 8px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink)}
+.btn{font:600 15px var(--sans);min-height:44px;padding:0 16px;border-radius:6px;border:1px solid var(--ink);background:var(--bg);color:var(--ink);cursor:pointer}
+.prose{max-width:68ch}
+.prose h3{margin:28px 0 6px}
+.prose p,.prose li{font-size:17px}
+footer{border-top:1px solid var(--line);padding:20px 0 40px;font-size:14px;color:var(--muted)}
+pre,.scroll{overflow-x:auto}
+@media(max-width:860px){.lead,.grid,.two{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:600px){
+ .mast .date{margin-left:0;width:100%}
+ .compare{grid-template-columns:minmax(0,1fr)}
+ .cell{flex-basis:66px}
+ table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-block:10px;border-bottom:1px solid var(--line)}
+ .stack td{display:flow-root;border:0;padding:3px 0;padding-inline-start:8em;text-align:start}
+ .stack td::before{content:attr(data-l);float:inline-start;width:7.5em;margin-inline-start:-8em;white-space:normal;color:var(--muted)}
+ .stack td:empty{display:none}}
+@media(prefers-reduced-motion:no-preference){.bar span{transition:flex-grow .4s ease}}
+</style>
+<script>new MutationObserver(()=>{for(const c of document.querySelectorAll('.stack td:not([data-l])')){let i=0,p=c;while(p=p.previousElementSibling)i+=p.colSpan;c.dataset.l=c.closest('table').rows[0].cells[i]?.textContent||''}}).observe(document,{childList:true,subtree:true})</script>
+</head>
+<body>
+<header>
+ <div class="wrap">
+  <div class="mast">
+   <h1>Hela bilden</h1>
+   <p>Svenska nyheter – och vem som rapporterar dem, från vänster till höger</p>
+   <span class="date" id="gen"></span>
+  </div>
+  <nav aria-label="Vyer">
+   <a href="#nyheter" data-v="nyheter">Nyheter</a>
+   <a href="#blinda" data-v="blinda">Blinda fläckar</a>
+   <a href="#kallor" data-v="kallor">Källor</a>
+   <a href="#metod" data-v="metod">Så fungerar det</a>
+  </nav>
+ </div>
+</header>
+<div class="note" id="note" hidden><div class="wrap" id="noteText"></div></div>
+
+<main class="wrap">
+ <section class="view" id="v-nyheter">
+  <div id="lead"></div>
+  <div class="tools">
+   <input id="q" type="search" placeholder="Sök i rubriker, t.ex. ”Centerpartiet”" aria-label="Sök nyheter">
+   <div class="chips" role="group" aria-label="Filtrera på täckning">
+    <button class="chip" data-f="alla" aria-pressed="true">Alla</button>
+    <button class="chip" data-f="v" aria-pressed="false">Mest vänster</button>
+    <button class="chip" data-f="bal" aria-pressed="false">Balanserat</button>
+    <button class="chip" data-f="h" aria-pressed="false">Mest höger</button>
+   </div>
+  </div>
+  <div class="grid" id="grid"></div>
+  <section class="singles" id="singles"></section>
+ </section>
+
+ <section class="view" id="v-lokalt" hidden><div id="local"></div></section>
+
+ <section class="view" id="v-blinda" hidden>
+  <h2>Blinda fläckar</h2>
+  <p class="intro muted">Händelser som minst två källor tagit upp, där minst hälften av källorna står på ena sidan och ingen på den andra. Det betyder inte att den andra sidan missat något med flit – men det är värt att veta vad ens egna favoritkällor inte skriver om.</p>
+  <div class="two">
+   <section class="v"><h3>Missas av högern</h3><div id="bsV"></div></section>
+   <section class="h"><h3>Missas av vänstern</h3><div id="bsH"></div></section>
+  </div>
+ </section>
+
+ <section class="view" id="v-kallor" hidden>
+  <h2>Källor och klassning</h2>
+  <p class="intro">Placeringen bygger på hur varje tidnings ledarsida själv beskriver sin politiska hållning. Håller du inte med? Ändra under ”Din klassning” – sidan räknar om alla staplar direkt. Ändringen sparas bara i din webbläsare.</p>
+  <div class="scroll">
+   <table class="stack">
+    <thead><tr><th>Källa</th><th>Placering</th><th>Beteckning</th><th>Underlag</th><th>Din klassning</th><th>I urvalet</th></tr></thead>
+    <tbody id="srcRows"></tbody>
+   </table>
+  </div>
+  <p><button class="btn" id="reset" type="button">Återställ min klassning</button> <span id="resetMsg" class="muted" role="status"></span></p>
+ </section>
+
+ <section class="view prose" id="v-metod" hidden>
+  <h2>Så fungerar Hela bilden</h2>
+  <p>Sidan samlar rubriker från svenska nyhetskällor, grupperar artiklar som handlar om samma händelse och visar hur täckningen fördelar sig mellan källor till vänster, i mitten och till höger.</p>
+  <h3>Hur källorna placeras</h3>
+  <p>Svensk press har en lång tradition av att ledarsidan deklarerar en politisk beteckning, till exempel ”oberoende liberal” eller ”obunden socialdemokratisk”. Hela bilden utgår från den egna beteckningen och placerar källan på en sjugradig skala:</p>
+  <ul>
+   <li><b>Vänster</b> – socialistiska och rödgröna ledarsidor.</li>
+   <li><b>Lutar vänster</b> – socialdemokratiska ledarsidor.</li>
+   <li><b>Mitten</b> – public service, som enligt sändningstillståndet ska vara opartiskt, och partipolitiskt neutrala nyhetstjänster.</li>
+   <li><b>Lutar höger</b> – liberala ledarsidor, som i svensk debatt räknas till den borgerliga sidan.</li>
+   <li><b>Höger</b> – moderata och liberalkonservativa ledarsidor.</li>
+   <li><b>Långt höger</b> – högerpopulistisk alternativmedia.</li>
+  </ul>
+  <p>I fördelningsstapeln räknas allt till vänster om mitten som vänster och allt till höger om mitten som höger. Den exakta placeringen syns under Källor.</p>
+  <h3>Det här visar stapeln – och inte</h3>
+  <p>Klassningen gäller ledarsidan, inte nyhetsjournalistiken. Svenska nyhetsredaktioner är formellt fristående från ledarredaktionen. Stapeln visar alltså vilka <i>sorters</i> källor som tar upp en händelse, inte att en enskild artikel är vinklad. Varje källa räknas en gång per händelse, oavsett hur många artiklar den skrivit.</p>
+  <h3>Gruppering och blinda fläckar</h3>
+  <p>Artiklar grupperas efter hur lika deras rubriker och ingresser är. Metoden är enkel och missar ibland kopplingar, särskilt för ledare och krönikor med kreativa rubriker. En blind fläck är en händelse med minst två källor där minst hälften kommer från ena sidan och ingen från den andra.</p>
+  <h3>Lokala källor</h3>
+  <p>Lokaltidningar och lokal public service visas under en egen flik per ort. På första sidan räknas de bara in när de skriver om samma händelse som riksmedierna, så att lokala nyheter inte tränger undan de nationella.</p>
+  <h3>Uppdatering</h3>
+  <p id="runInfo"></p>
+ </section>
+</main>
+<footer><div class="wrap">Rubrikerna länkar till originalartiklarna hos respektive källa. Hela bilden visar bara rubriker och länkar.</div></footer>
+
+<script>
+{
+const LEANS=[[-3,'Långt vänster'],[-2,'Vänster'],[-1,'Lutar vänster'],[0,'Mitten'],[1,'Lutar höger'],[2,'Höger'],[3,'Långt höger']];
+const SHORT={svt:'SVT',sr:'Ekot',altinget:'Altinget',dn:'DN',expressen:'Expressen',gp:'GP',sydsvenskan:'SDS',corren:'Corren',svd:'SvD',di:'Di',nt:'NT',kuriren:'Kuriren',friatider:'Fria Tider',aftonbladet:'AB',arbetet:'Arbetet',nsd:'NSD',arena:'Arena',etc:'ETC',flamman:'Flamman',gd:'GD',arbetarbladet:'Arbetarbladet','svt-gavleborg':'SVT Gävleborg','p4-gavleborg':'P4 Gävleborg'};
+const BN={v:'Vänster',m:'Mitten',h:'Höger'};
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const safeUrl=u=>/^https:\/\//.test(String(u))?esc(u):'#';
+const fmt=new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/Stockholm',weekday:'short',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
+const fmtDate=d=>{try{return fmt.format(new Date(d))}catch(e){return ''}};
+let DATA=null,SRC={},OVR={},filter='alla',query='';
+try{OVR=JSON.parse(localStorage.getItem('hb-lean')||'{}')||{}}catch(e){OVR={}}
+const saveOvr=()=>{try{localStorage.setItem('hb-lean',JSON.stringify(OVR))}catch(e){}};
+const leanOf=id=>(id in OVR?OVR[id]:(SRC[id]?SRC[id].lean:0));
+const bucket=l=>l<0?'v':l>0?'h':'m';
+const nameOf=id=>SRC[id]?SRC[id].name:id;
+const shortOf=id=>SHORT[id]||nameOf(id);
+const isReg=id=>!!(SRC[id]&&SRC[id].region);
+const slug=r=>String(r).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+const leanName=id=>{const l=LEANS.find(x=>x[0]===leanOf(id));return l?l[1]:''};
+let REGIONS=[];
+
+function stats(st){
+  const ids=[...new Set(st.articles.map(a=>a.s))];
+  const c={v:0,m:0,h:0};ids.forEach(id=>c[bucket(leanOf(id))]++);
+  const n=ids.length||1;
+  return {ids,c,n:ids.length,p:{v:c.v/n,m:c.m/n,h:c.h/n}};
+}
+function bar(s){
+  const seg=k=>{const pct=Math.round(s.p[k]*100);return s.c[k]?`<span class="${k}" style="flex:${s.c[k]} 1 0" title="${BN[k]}: ${s.c[k]} av ${s.n} källor">${pct>=14?(pct+' %'):''}</span>`:''};
+  return `<div class="bar" role="img" aria-label="Vänster ${Math.round(s.p.v*100)} procent, mitten ${Math.round(s.p.m*100)} procent, höger ${Math.round(s.p.h*100)} procent">${seg('v')}${seg('m')}${seg('h')}</div>
+  <div class="legend"><span><i class="dot v"></i>Vänster <b>${s.c.v}</b></span><span><i class="dot m"></i>Mitten <b>${s.c.m}</b></span><span><i class="dot h"></i>Höger <b>${s.c.h}</b></span></div>`;
+}
+function tags(ids){
+  return `<div class="srcs">${ids.slice().sort((a,b)=>leanOf(a)-leanOf(b)).map(id=>`<span class="tag ${bucket(leanOf(id))}">${esc(shortOf(id))}</span>`).join('')}</div>`;
+}
+function compare(st){
+  const g={v:[],m:[],h:[]};
+  st.articles.forEach(a=>g[bucket(leanOf(a.s))].push(a));
+  return `<div class="compare">${['v','m','h'].map(k=>`<div class="col ${k}"><h5>${BN[k]}</h5>${g[k].length?`<ul>${g[k].map(a=>`<li><a href="${safeUrl(a.u)}" target="_blank" rel="noopener">${esc(a.t)}</a><span class="src">${esc(nameOf(a.s))} · ${esc(fmtDate(a.d))}</span></li>`).join('')}</ul>`:`<p class="none">Inga källor härifrån har rapporterat.</p>`}</div>`).join('')}</div>`;
+}
+function strip(s){
+  const all=Object.keys(SRC).filter(id=>!isReg(id)||s.ids.includes(id)).sort((a,b)=>leanOf(a)-leanOf(b)||nameOf(a).localeCompare(nameOf(b),'sv'));
+  return `<div class="strip"><h4>Vem rapporterar?</h4><div class="cells">${all.map(id=>{
+    const on=s.ids.includes(id),na=!SRC[id].inSnapshot;
+    const lab=LEANS.find(l=>l[0]===leanOf(id));
+    return `<span class="cell ${bucket(leanOf(id))} ${on?'on':na?'na':'off'}" title="${esc(nameOf(id))} – ${esc(lab?lab[1]:'')}${na?' (saknas i urvalet)':on?' (har rapporterat)':' (har inte rapporterat)'}">${esc(shortOf(id))}<small>${on?'Skrev':na?'Ej hämtad':'–'}</small></span>`}).join('')}</div>
+    <div class="striplab"><span>← Vänster</span><span>Mitten</span><span>Höger →</span></div></div>`;
+}
+function meta(st,s){
+  return `<div class="meta"><span>${s.n} ${s.n===1?'källa':'källor'}</span><span>${st.articles.length} ${st.articles.length===1?'artikel':'artiklar'}</span><span>Senast ${esc(fmtDate(st.updated))}</span></div>`;
+}
+function leadHtml(st,s){
+  return `<article class="lead"><div><div class="kicker">Flest källor just nu</div><h2>${esc(st.title)}</h2>${st.summary?`<p class="sum">${esc(st.summary)}</p>`:''}${meta(st,s)}${bar(s)}</div>${strip(s)}<details class="leadcmp"${matchMedia('(min-width:861px)').matches?' open':''}><summary>Jämför rubrikerna</summary>${compare(st)}</details></article>`;
+}
+function card(st,s){
+  return `<article class="card"><h3>${esc(st.title)}</h3>${st.summary?`<p class="sum">${esc(st.summary)}</p>`:''}${bar(s)}${tags(s.ids)}<div class="meta" style="margin-top:8px"><span>${st.articles.length} artiklar</span><span>Senast ${esc(fmtDate(st.updated))}</span></div><details><summary>Jämför rubrikerna</summary>${compare(st)}</details></article>`;
+}
+function matches(st){
+  if(!query)return true;
+  const q=query.toLowerCase();
+  return (st.title+' '+st.summary+' '+st.articles.map(a=>a.t+' '+nameOf(a.s)).join(' ')).toLowerCase().includes(q);
+}
+function passFilter(s){
+  if(filter==='alla')return true;
+  if(filter==='v')return s.p.v>s.p.h+0.2;
+  if(filter==='h')return s.p.h>s.p.v+0.2;
+  return Math.abs(s.p.v-s.p.h)<=0.2&&(s.c.v+s.c.h)>0;
+}
+function renderNews(){
+  const list=DATA.stories.map(st=>({st,s:stats(st)})).filter(x=>!x.s.ids.every(isReg)&&matches(x.st));
+  const multi=list.filter(x=>x.s.n>1&&passFilter(x.s)).sort((a,b)=>b.s.n-a.s.n||b.st.articles.length-a.st.articles.length||new Date(b.st.updated)-new Date(a.st.updated));
+  const singles=list.filter(x=>x.s.n===1).sort((a,b)=>new Date(b.st.updated)-new Date(a.st.updated));
+  const showLead=!query&&filter==='alla'&&multi.length;
+  document.getElementById('lead').innerHTML=showLead?leadHtml(multi[0].st,multi[0].s):'';
+  const rest=showLead?multi.slice(1):multi;
+  document.getElementById('grid').innerHTML=rest.length?rest.map(x=>card(x.st,x.s)).join(''):(showLead?'':`<p class="empty" style="grid-column:1/-1">Inga händelser med flera källor matchar. Prova ett annat filter eller sökord.</p>`);
+  document.getElementById('singles').innerHTML=(filter==='alla'&&singles.length)?`<h2>Bara en källa har rapporterat</h2><p class="muted" style="margin:0">${singles.length} nyheter som ingen annan källa i urvalet tagit upp.</p><ul>${singles.map(x=>{const id=x.s.ids[0];const a=x.st.articles[0];return `<li><span class="tag ${bucket(leanOf(id))}">${esc(shortOf(id))}</span><a href="${safeUrl(a.u)}" target="_blank" rel="noopener">${esc(x.st.title)}</a></li>`}).join('')}</ul>`:'';
+}
+function renderBlind(){
+  const list=DATA.stories.map(st=>({st,s:stats(st)})).filter(x=>x.s.n>1&&!x.s.ids.every(isReg));
+  const mk=arr=>arr.length?arr.map(x=>card(x.st,x.s)).join(''):`<p class="empty">Inga sådana händelser i urvalet just nu.</p>`;
+  document.getElementById('bsV').innerHTML=mk(list.filter(x=>x.s.c.h===0&&x.s.p.v>=0.5));
+  document.getElementById('bsH').innerHTML=mk(list.filter(x=>x.s.c.v===0&&x.s.p.h>=0.5));
+}
+function renderSources(){
+  const ids=Object.keys(SRC).sort((a,b)=>(isReg(a)-isReg(b))||SRC[a].lean-SRC[b].lean||nameOf(a).localeCompare(nameOf(b),'sv'));
+  document.getElementById('srcRows').innerHTML=ids.map(id=>{
+    const s=SRC[id],l=leanOf(id),k=bucket(l);
+    return `<tr><td><b><a href="${safeUrl(s.url)}" target="_blank" rel="noopener">${esc(s.name)}</a></b><span class="muted">${esc(s.type)}${s.region?' · Lokalt, '+esc(s.region):''}</span></td>
+    <td><div class="scale" style="--c:var(--${k})" aria-label="${esc(LEANS.find(x=>x[0]===l)[1])}">${LEANS.map(x=>`<i class="${x[0]===l?'on':''}"></i>`).join('')}</div><span class="muted" style="font-size:13px">${esc(LEANS.find(x=>x[0]===l)[1])}${id in OVR?' (din)':''}</span></td>
+    <td>${esc(s.label)}</td><td>${esc(s.basis)}</td>
+    <td><select data-id="${esc(id)}" aria-label="Din klassning av ${esc(s.name)}">${LEANS.map(x=>`<option value="${x[0]}"${x[0]===l?' selected':''}>${x[1]}</option>`).join('')}</select></td>
+    <td>${s.inSnapshot?'Ja':'<span class="muted">Nej</span>'}</td></tr>`}).join('');
+}
+function renderLocal(){
+  const el=document.getElementById('local');
+  const region=REGIONS.find(r=>'lokalt-'+slug(r)===(location.hash||'').slice(1));
+  if(!DATA||!region){el.innerHTML='';return}
+  const rs=Object.keys(SRC).filter(id=>SRC[id].region===region).sort((a,b)=>leanOf(a)-leanOf(b)||nameOf(a).localeCompare(nameOf(b),'sv'));
+  const list=DATA.stories.map(st=>({st,s:stats(st)})).filter(x=>x.s.ids.some(id=>SRC[id]&&SRC[id].region===region));
+  const multi=list.filter(x=>x.s.n>1).sort((a,b)=>b.s.n-a.s.n||new Date(b.st.updated)-new Date(a.st.updated));
+  const singles=list.filter(x=>x.s.n===1).sort((a,b)=>new Date(b.st.updated)-new Date(a.st.updated));
+  const count=id=>DATA.stories.reduce((n,st)=>n+st.articles.filter(a=>a.s===id).length,0);
+  el.innerHTML=`<h2>Lokalt: ${esc(region)}</h2>
+  <p class="intro muted">Nyheter från de lokala källorna nedan. Händelser som även riksmedierna skriver om finns också med här, och de lokala källorna räknas då in i stapeln på första sidan.</p>
+  <div class="cells" style="margin-bottom:28px">${rs.map(id=>{const na=!SRC[id].inSnapshot;const n=count(id);return `<span class="cell ${bucket(leanOf(id))} ${na?'na':'on'}" style="max-width:220px;flex-basis:150px" title="${esc(leanName(id))}">${esc(nameOf(id))}<small>${esc(leanName(id))} · ${na?'ej hämtad':n+' artiklar'}</small></span>`}).join('')}</div>
+  ${multi.length?`<h3 style="margin:0 0 14px">Flera källor rapporterar</h3><div class="grid">${multi.map(x=>card(x.st,x.s)).join('')}</div>`:`<p class="empty">Ingen lokal händelse har ännu tagits upp av mer än en källa.</p>`}
+  ${singles.length?`<section class="singles"><h2>Bara en källa har rapporterat</h2><ul>${singles.map(x=>{const id=x.s.ids[0];const a=x.st.articles[0];return `<li><span class="tag ${bucket(leanOf(id))}">${esc(shortOf(id))}</span><a href="${safeUrl(a.u)}" target="_blank" rel="noopener">${esc(x.st.title)}</a></li>`}).join('')}</ul></section>`:''}`;
+}
+function renderAll(){renderNews();renderBlind();renderSources();renderLocal()}
+function route(){
+  const v=(location.hash||'#nyheter').slice(1);
+  const local=REGIONS.map(r=>'lokalt-'+slug(r));
+  const ok=['nyheter','blinda','kallor','metod',...local].includes(v)?v:'nyheter';
+  const view=local.includes(ok)?'lokalt':ok;
+  document.querySelectorAll('.view').forEach(el=>el.hidden=el.id!=='v-'+view);
+  if(view==='lokalt')renderLocal();
+  document.querySelectorAll('nav a').forEach(a=>{if(a.dataset.v===ok)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
+}
+document.querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>{
+  filter=b.dataset.f;document.querySelectorAll('.chip').forEach(c=>c.setAttribute('aria-pressed',String(c===b)));renderNews();
+}));
+let t;document.getElementById('q').addEventListener('input',e=>{clearTimeout(t);t=setTimeout(()=>{query=e.target.value.trim();renderNews()},150)});
+document.getElementById('srcRows').addEventListener('change',e=>{
+  const sel=e.target.closest('select');if(!sel)return;
+  const id=sel.dataset.id,val=Number(sel.value);
+  if(val===SRC[id].lean)delete OVR[id];else OVR[id]=val;
+  saveOvr();renderAll();
+});
+document.getElementById('reset').addEventListener('click',()=>{OVR={};saveOvr();renderAll();document.getElementById('resetMsg').textContent='Klassningen är återställd.'});
+window.addEventListener('hashchange',route);route();
+
+fetch('news.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error(r.status);return r.json()}).then(d=>{
+  DATA=d;d.sources.forEach(s=>{SRC[s.id]=s});
+  REGIONS=[...new Set(d.sources.map(s=>s.region).filter(Boolean))];
+  const first=document.querySelector('nav a[data-v="nyheter"]');
+  REGIONS.slice().reverse().forEach(r=>{const a=document.createElement('a');a.href='#lokalt-'+slug(r);a.dataset.v='lokalt-'+slug(r);a.textContent=r;first.after(a)});
+  Object.keys(OVR).forEach(k=>{if(!SRC[k]||!LEANS.some(l=>l[0]===OVR[k]))delete OVR[k]});
+  document.getElementById('gen').textContent=(d.snapshot?'Ögonblicksbild ':'Uppdaterad ')+fmtDate(d.generated);
+  if(d.note){document.getElementById('noteText').textContent=d.note;document.getElementById('note').hidden=false}
+  document.getElementById('runInfo').textContent=d.snapshot
+    ?'Det du ser nu är en ögonblicksbild. I driftsversionen hämtar ett litet skript alla källors RSS-flöden var 30:e minut och bygger om sidan automatiskt.'
+    :'Ett skript hämtar källornas RSS-flöden var 30:e minut och bygger om sidan. Senaste körning: '+fmtDate(d.generated)+'.';
+  renderAll();route();
+}).catch(err=>{
+  document.getElementById('lead').innerHTML=`<p class="empty">Kunde inte läsa in nyheterna (${esc(err.message)}). Kontrollera att news.json ligger bredvid sidan.</p>`;
+});
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,1709 @@
+{
+ "generated": "2026-11-24T09:00:00+01:00",
+ "snapshot": true,
+ "note": "Ögonblicksbild från 24 november 2026, hämtad av Claude ur källornas RSS-flöden. Saknas i urvalet: Dagens Nyheter, Expressen, Sydsvenskan, Svenska Dagbladet, Dagens industri, Aftonbladet, Gefle Dagblad och Arbetarbladet (kunde inte hämtas härifrån) samt Norrbottens-Kuriren (bara lokala nyheter). När sidan körs på riktigt ingår alla källor.",
+ "sources": [
+  {
+   "id": "svt",
+   "name": "SVT Nyheter",
+   "lean": 0,
+   "label": "Public service",
+   "basis": "Sändningstillståndet kräver opartiskhet och saklighet. Ingen ledarsida.",
+   "type": "Public service",
+   "url": "https://www.svt.se",
+   "inSnapshot": true
+  },
+  {
+   "id": "sr",
+   "name": "Ekot (Sveriges Radio)",
+   "lean": 0,
+   "label": "Public service",
+   "basis": "Sändningstillståndet kräver opartiskhet och saklighet. Ingen ledarsida.",
+   "type": "Public service",
+   "url": "https://sverigesradio.se/ekot",
+   "inSnapshot": true
+  },
+  {
+   "id": "altinget",
+   "name": "Altinget",
+   "lean": 0,
+   "label": "Partipolitiskt neutral",
+   "basis": "Politisk nyhetstjänst som enligt sitt eget syfte är partipolitiskt neutral; debattsidan är öppen för alla håll.",
+   "type": "Nyhetssajt",
+   "url": "https://www.altinget.se",
+   "inSnapshot": true
+  },
+  {
+   "id": "dn",
+   "name": "Dagens Nyheter",
+   "lean": 1,
+   "label": "Oberoende liberal",
+   "basis": "Ledarsidans egen beteckning: oberoende liberal.",
+   "type": "Dagstidning",
+   "url": "https://www.dn.se",
+   "inSnapshot": false
+  },
+  {
+   "id": "expressen",
+   "name": "Expressen",
+   "lean": 1,
+   "label": "Oberoende liberal",
+   "basis": "Ledarsidans egen beteckning: oberoende liberal.",
+   "type": "Kvällstidning",
+   "url": "https://www.expressen.se",
+   "inSnapshot": false
+  },
+  {
+   "id": "gp",
+   "name": "Göteborgs-Posten",
+   "lean": 1,
+   "label": "Liberal",
+   "basis": "Ledarsidans egen beteckning: liberal.",
+   "type": "Dagstidning",
+   "url": "https://www.gp.se",
+   "inSnapshot": true
+  },
+  {
+   "id": "sydsvenskan",
+   "name": "Sydsvenskan",
+   "lean": 1,
+   "label": "Oberoende liberal",
+   "basis": "Ledarsidans egen beteckning: oberoende liberal.",
+   "type": "Dagstidning",
+   "url": "https://www.sydsvenskan.se",
+   "inSnapshot": false
+  },
+  {
+   "id": "corren",
+   "name": "Corren",
+   "lean": 1,
+   "label": "Liberal",
+   "basis": "Ledarsidans egen beteckning: liberal.",
+   "type": "Dagstidning",
+   "url": "https://www.corren.se",
+   "inSnapshot": true
+  },
+  {
+   "id": "svd",
+   "name": "Svenska Dagbladet",
+   "lean": 2,
+   "label": "Obunden moderat",
+   "basis": "Ledarsidans egen beteckning: obunden moderat (liberalkonservativ).",
+   "type": "Dagstidning",
+   "url": "https://www.svd.se",
+   "inSnapshot": false
+  },
+  {
+   "id": "di",
+   "name": "Dagens industri",
+   "lean": 2,
+   "label": "Liberalkonservativ",
+   "basis": "Ledarsidan beskrivs som oberoende liberalkonservativ, med borgerlig näringslivsprofil.",
+   "type": "Affärstidning",
+   "url": "https://www.di.se",
+   "inSnapshot": false
+  },
+  {
+   "id": "nt",
+   "name": "Norrköpings Tidningar",
+   "lean": 2,
+   "label": "Moderat",
+   "basis": "Ledarsidans egen beteckning: moderat.",
+   "type": "Dagstidning",
+   "url": "https://www.nt.se",
+   "inSnapshot": true
+  },
+  {
+   "id": "kuriren",
+   "name": "Norrbottens-Kuriren",
+   "lean": 2,
+   "label": "Moderat",
+   "basis": "Ledarsidans egen beteckning: moderat.",
+   "type": "Dagstidning",
+   "url": "https://www.kuriren.nu",
+   "inSnapshot": false
+  },
+  {
+   "id": "friatider",
+   "name": "Fria Tider",
+   "lean": 3,
+   "label": "Högerpopulistisk",
+   "basis": "Beskrivs i forskning som högerpopulistisk alternativmedia; pekas av Oxford Internet Institute ut som en av Sveriges tre största ”junk news”-källor.",
+   "type": "Alternativmedia",
+   "url": "https://www.friatider.se",
+   "inSnapshot": true
+  },
+  {
+   "id": "aftonbladet",
+   "name": "Aftonbladet",
+   "lean": -1,
+   "label": "Obunden socialdemokratisk",
+   "basis": "Ledarsidans egen beteckning: obunden socialdemokratisk.",
+   "type": "Kvällstidning",
+   "url": "https://www.aftonbladet.se",
+   "inSnapshot": false
+  },
+  {
+   "id": "arbetet",
+   "name": "Arbetet",
+   "lean": -1,
+   "label": "Socialdemokratisk",
+   "basis": "Ges ut av LO Mediehus; socialdemokratisk ledarlinje.",
+   "type": "Facklig tidning",
+   "url": "https://arbetet.se",
+   "inSnapshot": true
+  },
+  {
+   "id": "nsd",
+   "name": "Norrländska Socialdemokraten",
+   "lean": -1,
+   "label": "Socialdemokratisk",
+   "basis": "Ledarsidans egen beteckning: socialdemokratisk.",
+   "type": "Dagstidning",
+   "url": "https://www.nsd.se",
+   "inSnapshot": true
+  },
+  {
+   "id": "arena",
+   "name": "Dagens Arena",
+   "lean": -1,
+   "label": "Progressiv",
+   "basis": "Ges ut av Arenagruppen, en ideell förening för progressiv opinionsbildning med stöd från fackföreningsrörelsen.",
+   "type": "Nyhetssajt",
+   "url": "https://www.dagensarena.se",
+   "inSnapshot": true
+  },
+  {
+   "id": "etc",
+   "name": "Dagens ETC",
+   "lean": -2,
+   "label": "Rödgrön",
+   "basis": "Beskriver sig som ”Sveriges första röda dagstidning som tar gröna frågor på allvar”.",
+   "type": "Dagstidning",
+   "url": "https://www.etc.se",
+   "inSnapshot": true
+  },
+  {
+   "id": "flamman",
+   "name": "Flamman",
+   "lean": -2,
+   "label": "Socialistisk",
+   "basis": "Oberoende socialistisk veckotidning.",
+   "type": "Veckotidning",
+   "url": "https://www.flamman.se",
+   "inSnapshot": true
+  },
+  {
+   "id": "gd",
+   "name": "Gefle Dagblad",
+   "lean": 1,
+   "label": "Liberal",
+   "basis": "Liberal ledarsida; Gävles största dagstidning.",
+   "type": "Dagstidning",
+   "region": "Gävle",
+   "url": "https://www.gd.se",
+   "inSnapshot": false
+  },
+  {
+   "id": "arbetarbladet",
+   "name": "Arbetarbladet",
+   "lean": -1,
+   "label": "Socialdemokratisk",
+   "basis": "Socialdemokratisk ledarsida.",
+   "type": "Dagstidning",
+   "region": "Gävle",
+   "url": "https://www.arbetarbladet.se",
+   "inSnapshot": false
+  },
+  {
+   "id": "svt-gavleborg",
+   "name": "SVT Gävleborg",
+   "lean": 0,
+   "label": "Public service",
+   "basis": "SVT:s lokala nyheter för Gävleborg. Sändningstillståndet kräver opartiskhet och saklighet.",
+   "type": "Public service",
+   "region": "Gävle",
+   "url": "https://www.svt.se/nyheter/lokalt/gavleborg/",
+   "inSnapshot": true
+  },
+  {
+   "id": "p4-gavleborg",
+   "name": "P4 Gävleborg",
+   "lean": 0,
+   "label": "Public service",
+   "basis": "Sveriges Radios lokala nyheter för Gävleborg. Sändningstillståndet kräver opartiskhet och saklighet.",
+   "type": "Public service",
+   "region": "Gävle",
+   "url": "https://sverigesradio.se/gavleborg",
+   "inSnapshot": true
+  }
+ ],
+ "stories": [
+  {
+   "id": "37f011b599",
+   "title": "S och V låsta i striden om ministerposter",
+   "summary": "Magdalena Andersson har lagt fram ett ”startpaket” till Vänsterpartiet, men V har hittills sagt nej och håller fast vid kravet på ministerposter. Allt fler röster, även från egna led, uppmanar nu V att släppa kravet.",
+   "updated": "2026-11-23T22:22:43+00:00",
+   "articles": [
+    {
+     "s": "svt",
+     "t": "Möjlig öppning för att V ska släppa ministerkraven",
+     "u": "https://www.svt.se/nyheter/inrikes/mojlig-oppning-for-att-v-ska-slappa-ministerkraven",
+     "d": "2026-11-23T22:22:43+00:00"
+    },
+    {
+     "s": "svt",
+     "t": "S-toppens svar till V: ”Släpp prestigen”",
+     "u": "https://www.svt.se/nyheter/inrikes/s-toppens-svar-till-v-slapp-prestigen",
+     "d": "2026-11-23T18:39:57+00:00"
+    },
+    {
+     "s": "svt",
+     "t": "Tidigare V-riksdagsledamoten: ”Släpp ministerkravet”",
+     "u": "https://www.svt.se/nyheter/lokalt/varmland/tidigare-v-riksdagsledamoten-slapp-ministerkravet",
+     "d": "2026-11-23T16:22:07+00:00"
+    },
+    {
+     "s": "svt",
+     "t": "Mats Knutson: Tre skäl till att V nobbar S-budet",
+     "u": "https://www.svt.se/nyheter/inrikes/mats-knutson-tre-skal-till-att-v-nobbar-s-budet",
+     "d": "2026-11-23T16:11:57+00:00"
+    },
+    {
+     "s": "etc",
+     "t": "Den här regeringsbildningen börjar kännas väldigt oseriös",
+     "u": "https://www.etc.se/ledare/den-haer-regeringsbildningen-boerjar-kaennas-vaeldigt-oserioes?utm_source=rss",
+     "d": "2026-11-23T15:30:00+00:00"
+    },
+    {
+     "s": "etc",
+     "t": "Pressen på V – Hyresgästföreningen jublar över ”startpaket”",
+     "u": "https://www.etc.se/inrikes/pressen-paa-v-hyresgaestfoereningen-jublar-oever-startpaket?utm_source=rss",
+     "d": "2026-11-23T15:10:00+00:00"
+    },
+    {
+     "s": "arena",
+     "t": "Det är dags att plocka hem segern, Nooshi",
+     "u": "https://www.dagensarena.se/opinion/det-ar-dags-att-plocka-hem-segern-nooshi/",
+     "d": "2026-11-23T14:05:05+00:00"
+    },
+    {
+     "s": "arena",
+     "t": "Vänsterpartiet har fått konkreta bud om migrationspolitiken",
+     "u": "https://www.dagensarena.se/innehall/vansterpartiet-har-fatt-konkreta-bud-om-migrationspolitiken/",
+     "d": "2026-11-23T11:31:58+00:00"
+    },
+    {
+     "s": "svt",
+     "t": "Chatt: Vem blir statsminister – och när är det klart?",
+     "u": "https://www.svt.se/nyheter/inrikes/chatt-vem-blir-statsminister-och-nar-ar-det-klart",
+     "d": "2026-11-23T09:23:25+00:00"
+    },
+    {
+     "s": "friatider",
+     "t": "Nooshis svar till S: ”Går inte att utpressa varandra”",
+     "u": "https://www.friatider.se/nooshis-svar-till-s-gar-inte-att-utpressa-varandra",
+     "d": "2026-11-23T09:19:36+00:00"
+    },
+    {
+     "s": "flamman",
+     "t": "Lossa Nooshi från masten!",
+     "u": "https://www.flamman.se/lossa-nooshi-fran-masten/",
+     "d": "2026-11-23T08:48:56+00:00"
+    },
+    {
+     "s": "etc",
+     "t": "Därför nobbar Vänsterpartiet budet: ”Kan innebära vad som helst”",
+     "u": "https://www.etc.se/inrikes/daerfoer-nobbar-vaensterpartiet-budet-kan-innebaera-vad-som-helst?utm_source=rss",
+     "d": "2026-11-22T21:40:00+00:00"
+    },
+    {
+     "s": "svt",
+     "t": "”Andersson söker ett sista halmstrå”",
+     "u": "https://www.svt.se/nyheter/inrikes/andersson-soker-ett-sista-halmstra",
+     "d": "2026-11-22T19:08:07+00:00"
+    },
+    {
+     "s": "etc",
+     "t": "Andersson: ”Startpaket” till V klart",
+     "u": "https://www.etc.se/inrikes/andersson-startpaket-till-v-klart?utm_source=rss",
+     "d": "2026-11-22T17:20:00+00:00"
+    },
+    {
+     "s": "svt",
+     "t": "Därför backar inte V",
+     "u": "https://www.svt.se/nyheter/inrikes/darfor-backar-inte-v",
+     "d": "2026-11-21T05:13:07+00:00"
+    },
+    {
+     "s": "svt",
+     "t": "Uppgifter: V nobbar S-bud om tjänstemän på regeringskansliet",
+     "u": "https://www.svt.se/nyheter/inrikes/uppgifter-v-nobbar-s-bud-om-tjansteman-pa-regeringskansliet",
+     "d": "2026-11-20T15:30:11+00:00"
+    }
+   ]
+  },
+  {
+   "id": "7fc8dc2644",
+   "title": "Centerpartiet återupptar samtalen med högersidan",
+   "summary": "C-ledaren återupptar samtalen med partierna till höger inför tisdagens möten hos talmannen. Beskedet splittrar partiet, och minst en företrädare hotar att lämna.",
+   "updated": "2026-11-24T07:35:14+00:00",
+   "articles": [
+    {
+     "s": "arbetet",
+     "t": "”Varför är det en naturlag att Centerpartiet ska sitta i regering?”",
+     "u": "https://arbetet.se/2026/11/24/varfor-ar-det-en-naturlag-att-centerpartiet-ska-sitta-i-regering/",
+     "d": "2026-11-24T07:35:14+00:00"
+    },
+    {
+     "s": "etc",
+     "t": "Inför mötet med talmannen – provar högersväng",
+     "u": "https://www.etc.se/inrikes/infoer-moetet-med-talmannen-provar-hoegersvaeng?utm_source=rss",
+     "d": "2026-11-24T07:00:00+00:00"
+    },
+    {
+     "s": "sr",
+     "t": "Talmannens täta tisdag – här är vägen till en regering",
+     "u": "https://www.sverigesradio.se/artikel/9348584",
+     "d": "2026-11-24T04:09:00+00:00"
+    },
+    {
+     "s": "sr",
+     "t": "Högersvängen splittrar C: ”Inte alls överens”",
+     "u": "https://www.sverigesradio.se/artikel/9348700",
+     "d": "2026-11-24T00:03:00+00:00"
+    },
+    {
+     "s": "svt",
+     "t": "Tidigare C-ledaren: ”Syna Kristersson”",
+     "u": "https://www.svt.se/nyheter/inrikes/tidigare-c-ledaren-syna-kristersson",
+     "d": "2026-11-23T21:56:36+00:00"
+    },
+    {
+     "s": "corren",
+     "t": "C-ledaren: Återupptar samtal med högersidan",
+     "u": "https://www.corren.se/nyheter/inrikes/politik/artikel/c-ledaren-aterupptar-samtal-med-hogersidan/lw6nvwyj",
+     "d": "2026-11-23T19:50:00+00:00"
+    },
+    {
+     "s": "flamman",
+     "t": "Om Centerpartiet väljer Åkesson är det deras beslut",
+     "u": "https://www.flamman.se/om-centerpartiet-valjer-akesson-ar-det-deras-beslut/",
+     "d": "2026-11-23T16:52:02+00:00"
+    },
+    {
+     "s": "etc",
+     "t": "Jan Jönsson: ”C använder samma argument som L”",
+     "u": "https://www.etc.se/inrikes/jan-joensson-c-anvaender-samma-argument-som-l?utm_source=rss",
+     "d": "2026-11-23T16:20:00+00:00"
+    },
+    {
+     "s": "friatider",
+     "t": "Han hotar hoppa av C vid högersväng",
+     "u": "https://www.friatider.se/han-hotar-hoppa-av-c-vid-hogersvang",
+     "d": "2026-11-23T16:17:48+00:00"
+    },
+    {
+     "s": "arena",
+     "t": "Blir det en ny Kristerssonregering nu?",
+     "u": "https://www.dagensarena.se/innehall/blir-det-en-ny-kristerssonregering-nu/",
+     "d": "2026-11-23T10:30:05+00:00"
+    },
+    {
+     "s": "altinget",
+     "t": "Det våras för Ulf Kristersson",
+     "u": "https://www.altinget.se/artikel/det-vaaras-for-ulf-kristersson",
+     "d": "2026-11-23T09:30:00+00:00"
+    },
+    {
+     "s": "flamman",
+     "t": "Här är V och C överens om ekonomin – och absolut inte",
+     "u": "https://www.flamman.se/har-ar-v-och-c-overens-om-ekonomin-och-absolut-inte/",
+     "d": "2026-11-22T11:36:35+00:00"
+    }
+   ]
+  },
+  {
+   "id": "05f5439f98",
+   "title": "Jensen Huang tillbaka som Nvidias vd – med stöd av Trump",
+   "summary": "Jensen Huang är tillbaka på vd-posten och börsen i New York steg kraftigt. Enligt uppgifter gav Trump garantier till Nvidias styrelse, och flera utredningar av kopplingen uppges vara på gång.",
+   "updated": "2026-11-24T06:00:00+00:00",
+   "articles": [
+    {
+     "s": "sr",
+     "t": "Flera utredningar mot Jensen Huang på gång – Trump-koppling kan granskas",
+     "u": "https://www.sverigesradio.se/artikel/9348722",
+     "d": "2026-11-24T06:00:00+00:00"
+    },
+    {
+     "s": "svt",
+     "t": "Nvidias vd tillbaka – Wall Street rusade vilt",
+     "u": "https://www.svt.se/nyheter/ekonomi/nvidias-vd-tillbaka-wall-street-rusade-vilt",
+     "d": "2026-11-23T21:23:56+00:00"
+    },
+    {
+     "s": "sr",
+     "t": "Uppgifter: Trump gav garantier om Huang till Nvidiastyrelse",
+     "u": "https://www.sverigesradio.se/artikel/9348677",
+     "d": "2026-11-23T20:54:00+00:00"
+    },
+    {
+     "s": "svt",
+     "t": "”Trump fick som han ville – men nya akter väntar i Nvidia-dramat”",
+     "u": "https://www.svt.se/nyheter/utrikes/trump-fick-som-han-ville-men-nya-akter-vantar-i-nvidia-dramat",
+     "d": "2026-11-23T16:42:07+00:00"
+    },
+    {
+     "s": "nt",
+     "t": "Huang gör comeback – fick stöd av Trump",
+     "u": "https://www.nt.se/ekonomi/artikel/huang-gor-comeback-fick-stod-av-trump/j82k29yj",
+     "d": "2026-11-23T15:30:00+00:00"
+    },
+    {
+     "s": "corren",
+     "t": "Huang gör comeback – fick stöd av Trump",
+     "u": "https://www.corren.se/ekonomi/artikel/huang-gor-comeback-fick-stod-av-trump/j82k29yj",
+     "d": "2026-11-23T14:37:00+00:00"
+    },
+    {
+     "s": "etc",
+     "t": "Jensen Huang tillbaka som vd för Nvidia",
+     "u": "https://www.etc.se/ekonomi/jensen-huang-tillbaka-som-vd-foer-nvidia?utm_source=rss",
+     "d": "2026-11-23T14:00:00+00:00"
+    }
+   ]
+  },
+  {
+   "id": "8701df2b40",
+   "title": "Klimattoppmötet slutade utan avtal",
+   "summary": "Klimatmötet slutade utan en ny överenskommelse och EU lämnade toppmötet utan klimatavtal.",
+   "updated": "2026-11-23T10:10:00+00:00",
+   "articles": [
+    {
+     "s": "altinget",
+     "t": "EU lämnade toppmöte utan klimatavtal: ”Sätter ner foten”",
+     "u": "https://www.altinget.se/artikel/eu-lamnade-toppmote-utan-klimatavtal-satter-ner-foten",
+     "d": "2026-11-23T10:10:00+00:00"
+    },
+    {
+     "s": "etc",
+     "t": "Ett fossilt praktfiasko är faktiskt precis vad vi behöver",
+     "u": "https://www.etc.se/ledare/ett-fossilt-praktfiasko-aer-faktiskt-precis-vad-vi-behoever?utm_source=rss",
+     "d": "2026-11-23T02:00:00+00:00"
+    },
+    {
+     "s": "arena",
+     "t": "Kollapsen ställer krav på Sveriges klimatpolitik",
+     "u": "https://www.dagensarena.se/opinion/kollapsen-staller-krav-pa-sveriges-klimatpolitik/",
+     "d": "2026-11-22T18:23:59+00:00"
+    },
+    {
+     "s": "svt",
+     "t": "Klimatmötet misslyckas – det kan hända nu",
+     "u": "https://www.svt.se/nyheter/inrikes/klimatmotet-misslyckas-det-kan-handa-nu",
+     "d": "2026-11-22T14:39:58+00:00"
+    }
+   ]
+  },
+  {
+   "id": "1097aeaf24",
+   "title": "Polisen varnar för bedrägerier inför Black week",
+   "summary": "Polisen varnar för bedrägerier i samband med Black week och ger råd om hur man undviker dem.",
+   "updated": "2026-11-23T09:00:00+00:00",
+   "articles": [
+    {
+     "s": "etc",
+     "t": "Fejkshopping och köpagenter – välkommen till Black Friday 2026",
+     "u": "https://www.etc.se/ekonomi/fejkshopping-och-koepagenter-vaelkommen-till-black-friday-2026?utm_source=rss",
+     "d": "2026-11-23T09:00:00+00:00"
+    },
+    {
+     "s": "nt",
+     "t": "Polisen varnar för bedrägerier under black week",
+     "u": "https://www.nt.se/nyheter/ostergotland/artikel/polisens-varning-infor-black-week-/rgo0g3pj",
+     "d": "2026-11-23T07:26:00+00:00"
+    },
+    {
+     "s": "gp",
+     "t": "Polisens varning inför Black week",
+     "u": "https://www.gp.se/nyheter/sverige/polisens-varning-infor-black-week-sa-undviker-du-bedrageri.a73ad8de-50c0-5611-8a7b-8dcecdbe8dba",
+     "d": "2026-11-23T06:45:27+00:00"
+    }
+   ]
+  },
+  {
+   "id": "7d90fc9fac",
+   "title": "Nya dödsoffer efter attacker i Ukraina",
+   "summary": "Attacker i Ukraina har krävt nya dödsoffer och många skadade.",
+   "updated": "2026-11-24T05:12:00+00:00",
+   "articles": [
+    {
+     "s": "corren",
+     "t": "Ukraina: Två döda och många skadade i attack",
+     "u": "https://www.corren.se/nyheter/utrikes/ukraina/artikel/ukraina-tva-doda-och-manga-skadade-i-attack/lyx5yzpr",
+     "d": "2026-11-24T05:12:00+00:00"
+    },
+    {
+     "s": "svt",
+     "t": "Tetjanas barnbarn begravdes i rasmassorna efter ryska attacken",
+     "u": "https://www.svt.se/nyheter/utrikes/tetjanas-barnbarn-begravdes-i-rasmassorna-efter-ryska-attacken",
+     "d": "2026-11-23T19:46:21+00:00"
+    }
+   ]
+  },
+  {
+   "id": "039350e561",
+   "title": "Rapport: Kriget har förorenat miljön i Gaza",
+   "summary": "En ny rapport pekar på att striderna har förgiftat miljön i Gaza, med ökad risk för cancer som följd.",
+   "updated": "2026-11-23T21:03:00+00:00",
+   "articles": [
+    {
+     "s": "sr",
+     "t": "Rapport: Striderna i Gaza förgiftar miljön – ökar risk för cancer",
+     "u": "https://www.sverigesradio.se/artikel/9348682",
+     "d": "2026-11-23T21:03:00+00:00"
+    },
+    {
+     "s": "etc",
+     "t": "Mer än 99 procent av Gaza kan vara förorenat – på grund av israeliska krigsbrott",
+     "u": "https://www.etc.se/klimat-miljo/mer-aen-99-procent-av-gaza-kan-vara-foerorenat-paa-grund-av-israeliska-krigsbrott?utm_source=rss",
+     "d": "2026-11-23T15:00:00+00:00"
+    }
+   ]
+  },
+  {
+   "id": "542c73c1e7",
+   "title": "Mässlingsfall på Södersjukhuset – smittspårning pågår",
+   "summary": "Ett fall av mässling har upptäckts på Södersjukhuset i Stockholm och smittspårning har inletts.",
+   "updated": "2026-11-23T08:45:26+00:00",
+   "articles": [
+    {
+     "s": "svt",
+     "t": "Mässlingsfall upptäckt på Södersjukhuset",
+     "u": "https://www.svt.se/nyheter/lokalt/stockholm/misstankt-utbrott-av-massling-i-stockholm",
+     "d": "2026-11-23T08:45:26+00:00"
+    },
+    {
+     "s": "etc",
+     "t": "Smittspårning efter mässlingsfall i Stockholm",
+     "u": "https://www.etc.se/inrikes/smittspaarning-efter-maesslingsfall-i-stockholm?utm_source=rss",
+     "d": "2026-11-23T08:40:00+00:00"
+    }
+   ]
+  },
+  {
+   "id": "037e8f89b4",
+   "title": "Carina Bergfeldt hjälpte adhd-expert att anmäla SVT",
+   "summary": "Uppdrag granskning rapporterar att Carina Bergfeldt hjälpte en adhd-expert att anmäla SVT. En utpekad SVT-medarbetare kallar det ett övertramp.",
+   "updated": "2026-11-23T10:00:00+00:00",
+   "articles": [
+    {
+     "s": "etc",
+     "t": "Utpekade SVT-medarbetaren om Carina Bergfeldt: ”Övertramp”",
+     "u": "https://www.etc.se/kultur-noje/utpekade-svt-medarbetaren-om-carina-bergfeldt-oevertramp?utm_source=rss",
+     "d": "2026-11-23T10:00:00+00:00"
+    },
+    {
+     "s": "svt",
+     "t": "Carina Bergfeldt hjälpte adhd-expert att anmäla SVT",
+     "u": "https://www.svt.se/nyheter/granskning/ug/carina-bergfeldt-hjalpte-adhd-expert-att-anmala-svt",
+     "d": "2026-11-20T15:44:36+00:00"
+    }
+   ]
+  },
+  {
+   "id": "dae43daeb0",
+   "title": "Karolina Ramqvist får Augustpriset",
+   "summary": "Karolina Ramqvist tilldelas årets Augustpris.",
+   "updated": "2026-11-23T18:00:00+00:00",
+   "articles": [
+    {
+     "s": "nsd",
+     "t": "Augustpriset till Karolina Ramqvist: Kanske passande",
+     "u": "https://www.nsd.se/kultur/litteratur/artikel/jokkmokksforfattaren-tar-hem-prestigefyllda-priset/jn3w350r",
+     "d": "2026-11-23T18:00:00+00:00"
+    },
+    {
+     "s": "etc",
+     "t": "Augustpriset till Karolina Ramqvist: ”Jag blev förvånad”",
+     "u": "https://www.etc.se/kultur-noje/augustpriset-till-karolina-ramqvist?utm_source=rss",
+     "d": "2026-11-23T17:11:30+00:00"
+    }
+   ]
+  },
+  {
+   "id": "276c79553f",
+   "title": "Ekot: Chat GPT underlättar planering av skoldåd",
+   "summary": "En granskning från Ekot visar hur Chat GPT kan användas för att planera skoldåd. Open AI har svarat på granskningen.",
+   "updated": "2026-11-24T05:00:00+00:00",
+   "articles": [
+    {
+     "s": "sr",
+     "t": "Chat GPT underlättar planering av skoldåd",
+     "u": "https://www.sverigesradio.se/artikel/9346690",
+     "d": "2026-11-24T05:00:00+00:00"
+    },
+    {
+     "s": "sr",
+     "t": "Så svarar Open AI på Ekots granskning",
+     "u": "https://www.sverigesradio.se/artikel/9348148",
+     "d": "2026-11-24T05:00:00+00:00"
+    },
+    {
+     "s": "sr",
+     "t": "Kartläggning: AI används för att planera attentat världen över",
+     "u": "https://www.sverigesradio.se/artikel/9346746",
+     "d": "2026-11-24T05:00:00+00:00"
+    },
+    {
+     "s": "sr",
+     "t": "Granskande reportern: Rädsla att AI kan leda till fler skoldåd",
+     "u": "https://www.sverigesradio.se/artikel/9346696",
+     "d": "2026-11-24T05:00:00+00:00"
+    }
+   ]
+  },
+  {
+   "id": "f163afcd92",
+   "title": "PFAS-förslagen klara",
+   "summary": "",
+   "updated": "2026-11-24T04:00:00+00:00",
+   "articles": [
+    {
+     "s": "altinget",
+     "t": "PFAS-förslagen klara: ”Ökar trycket på kommissionen”",
+     "u": "https://www.altinget.se/artikel/pfas-forslagen-klara-okar-trycket-paa-kommissionen",
+     "d": "2026-11-24T04:00:00+00:00"
+    },
+    {
+     "s": "altinget",
+     "t": "EU:s tillsynsmyndighet varnar för PFAS: En ”tickande bomb”",
+     "u": "https://www.altinget.se/artikel/eus-tillsynsmyndighet-varnar-for-pfas-en-tickande-bomb",
+     "d": "2026-11-20T13:05:00+00:00"
+    }
+   ]
+  },
+  {
+   "id": "8d20fe7a98",
+   "title": "Därför lyckas Estland i Pisa medan Sverige och Finland tappar",
+   "summary": "",
+   "updated": "2026-11-23T13:15:52+00:00",
+   "articles": [
+    {
+     "s": "svt",
+     "t": "Därför lyckas Estland i Pisa-undersökningen medan resultaten sjunker i Sverige och Finland",
+     "u": "https://www.svt.se/nyheter/uutiset/svenska/darfor-lyckas-estland-i-pisa-undersokningen-medan-resultaten-sjunker-i-sverige-och-finland",
+     "d": "2026-11-23T13:15:52+00:00"
+    },
+    {
+     "s": "svt",
+     "t": "Lärare: Pisa-resultaten kan inte styra besluten om skolan",
+     "u": "https://www.svt.se/nyheter/uutiset/svenska/larare-pisa-resultaten-kan-inte-styra-besluten-om-skolan",
+     "d": "2026-11-23T13:15:38+00:00"
+    }
+   ]
+  },
+  {
+   "id": "8d32af2cf3",
+   "title": "Ryska fartyget i Finska viken har bogserats bort",
+   "summary": "",
+   "updated": "2026-11-22T14:31:56+00:00",
+   "articles": [
+    {
+     "s": "svt",
+     "t": "Gränsbevakningen: ”Måste utgå från att lasten kan vara explosiv”",
+     "u": "https://www.svt.se/nyheter/utrikes/gransbevakningen-maste-utga-fran-att-lasten-kan-vara-explosiv",
+     "d": "2026-11-22T14:31:56+00:00"
+    },
+    {
+     "s": "svt",
+     "t": "Ryska fartyget har lämnat Finland – bogserades bort",
+     "u": "https://www.svt.se/nyheter/utrikes/fartyget-i-finska-viken-annu-inte-slackt",
+     "d": "2026-11-22T08:49:27+00:00"
+    }
+   ]
+  },
+  {
+   "id": "5b867658f8",
+   "title": "Sydkorea: Ryska plan orsakade varning",
+   "summary": "",
+   "updated": "2026-11-23T23:46:39+00:00",
+   "articles": [
+    {
+     "s": "svt",
+     "t": "Sydkorea: Ryska plan orsakade varning",
+     "u": "https://www.svt.se/nyheter/utrikes/sydkorea-nordkorea-tros-ha-krankt-luftrum",
+     "d": "2026-11-23T23:46:39+00:00"
+    }
+   ]
+  },
+  {
+   "id": "bfce81d7d3",
+   "title": "Missvisande video sprider oro kring nya kreditlagen: ”Hejdå Klarna!”",
+   "summary": "",
+   "updated": "2026-11-23T12:50:00+00:00",
+   "articles": [
+    {
+     "s": "svt",
+     "t": "Missvisande video sprider oro kring nya kreditlagen: ”Hejdå Klarna!”",
+     "u": "https://www.svt.se/nyheter/inrikes/missvisande-video-sprider-oro-kring-nya-kreditlagen-hejda-klarna",
+     "d": "2026-11-23T12:50:00+00:00"
+    }
+   ]
+  },
+  {
+   "id": "f72ff69f05",
+   "title": "Efterlyst svensk greps vid ryska gränsen",
+   "summary": "",
+   "updated": "2026-11-23T12:43:16+00:00",
+   "articles": [
+    {
+     "s": "svt",
+     "t": "Efterlyst svensk greps vid ryska gränsen",
+     "u": "https://www.svt.se/nyheter/utrikes/efterlyst-svensk-greps-vid-ryska-gransen",
+     "d": "2026-11-23T12:43:16+00:00"
+    }
+   ]
+  },
+  {
+   "id": "7060e7edaf",
+   "title": "Bombhot mot flera skolor i Danmark och Tyskland",
+   "summary": "",
+   "updated": "2026-11-23T09:41:20+00:00",
+   "articles": [
+    {
+     "s": "svt",
+     "t": "Bombhot mot flera skolor i Danmark och Tyskland",
+     "u": "https://www.svt.se/nyheter/utrikes/larm-om-bombhot-mot-flera-skolor-i-danmark",
+     "d": "2026-11-23T09:41:20+00:00"
+    }
+   ]
+  },
+  {
+   "id": "1fff178ef7",
+   "title": "LKAB och Stegra fördjupar samarbetet om järnmalm",
+   "summary": "",
+   "updated": "2026-11-23T08:18:21+00:00",
+   "articles": [
+    {
+     "s": "svt",
+     "t": "LKAB och Stegra fördjupar samarbetet om järnmalm",
+     "u": "https://www.svt.se/nyheter/lokalt/norrbotten/utokat-samarbete-mellan-stegra-och-lkab",
+     "d": "2026-11-23T08:18:21+00:00"
+    }
+   ]
+  },
+  {
+   "id": "9e913959a9",
+   "title": "Passagerarbuss har vält – många olyckor efter snöovädret",
+   "summary": "",
+   "updated": "2026-11-23T05:31:16+00:00",
+   "articles": [
+    {
+     "s": "svt",
+     "t": "Passagerarbuss har vält – många olyckor efter snöovädret",
+     "u": "https://www.svt.se/nyheter/lokalt/jonkoping/dubbla-olyckor-pa-riksvag-31-trafiken-kan-paverkas",
+     "d": "2026-11-23T05:31:16+00:00"
+    }
+   ]
+  },
+  {
+   "id": "1f221f918f",
+   "title": "”Upptrappade läget på Östersjön kan skapa nytt Hormuz”",
+   "summary": "",
+   "updated": "2026-11-22T18:59:44+00:00",
+   "articles": [
+    {
+     "s": "svt",
+     "t": "”Upptrappade läget på Östersjön kan skapa nytt Hormuz”",
+     "u": "https://www.svt.se/nyheter/inrikes/upptrappade-laget-pa-ostersjon-kan-skapa-nytt-hormuz",
+     "d": "2026-11-22T18:59:44+00:00"
+    }
+   ]
+  },
+  {
+   "id": "08966705b2",
+   "title": "Ex-generalens kritik: Europa inte redo för Rysslands luftkrig",
+   "summary": "",
+   "updated": "2026-11-22T05:17:22+00:00",
+   "articles": [
+    {
+     "s": "svt",
+     "t": "Ex-generalens kritik: Europa inte redo för Rysslands luftkrig",
+     "u": "https://www.svt.se/nyheter/inrikes/ex-generalens-kritik-europa-inte-redo-for-rysslands-luftkrig",
+     "d": "2026-11-22T05:17:22+00:00"
+    }
+   ]
+  },
+  {
+   "id": "6e90f74d79",
+   "title": "Regeringen gör jättebantning på naturvård: ”Förvärrar situationen”",
+   "summary": "",
+   "updated": "2026-11-22T04:30:00+00:00",
+   "articles": [
+    {
+     "s": "svt",
+     "t": "Regeringen gör jättebantning på naturvård: ”Förvärrar situationen”",
+     "u": "https://www.svt.se/nyheter/lokalt/vasternorrland/regeringen-gor-jattenedskarning-pa-naturvard-forvarrar-situationen",
+     "d": "2026-11-22T04:30:00+00:00"
+    }
+   ]
+  },
+  {
+   "id": "a5fce2d75e",
+   "title": "Branschens vinnare – ökar omsättningen med nästan 60 procent",
+   "summary": "",
+   "updated": "2026-11-24T06:22:00+00:00",
+   "articles": [
+    {
+     "s": "sr",
+     "t": "Branschens vinnare – ökar omsättningen med nästan 60 procent",
+     "u": "https://www.sverigesradio.se/artikel/9345504",
+     "d": "2026-11-24T06:22:00+00:00"
+    }
+   ]
+  },
+  {
+   "id": "d4fbbf89b2",
+   "title": "Migranter strömmar till Kreta – oroar turistindustrin",
+   "summary": "",
+   "updated": "2026-11-24T04:39:00+00:00",
+   "articles": [
+    {
+     "s": "sr",
+     "t": "Migranter strömmar till Kreta – oroar turistindustrin",
+     "u": "https://www.sverigesradio.se/artikel/9348679",
+     "d": "2026-11-24T04:39:00+00:00"
+    }
+   ]
+  },
+  {
+   "id": "d7bb7d0466",
+   "title": "Tyskar alltmer negativa till Ukrainastöd",
+   "summary": "",
+   "updated": "2026-11-24T03:07:00+00:00",
+   "articles": [
+    {
+     "s": "sr",
+     "t": "Tyskar alltmer negativa till Ukrainastöd",
+     "u": "https://www.sverigesradio.se/artikel/9348598",
+     "d": "2026-11-24T03:07:00+00:00"
+    }
+   ]
+  },
+  {
+   "id": "91ae4f4457",
+   "title": "Israeliskt flyganfall mot Gaza – minst tre dödade",
+   "summary": "",
+   "updated": "2026-11-24T00:52:00+00:00",
+   "articles": [
+    {
+     "s": "sr",
+     "t": "Israeliskt flyganfall mot Gaza – minst tre dödade",
+     "u": "https://www.sverigesradio.se/artikel/9348701",
+     "d": "2026-11-24T00:52:00+00:00"
+    }
+   ]
+  },
+  {
+   "id": "8b85bc5baf",
+   "title": "Nordirland har Storbritanniens bästa ekonomi efter Brexit",
+   "summary": "",
+   "updated": "2026-11-24T05:09:00+00:00",
+   "articles": [
+    {
+     "s": "sr",
+     "t": "Nordirland har Storbritanniens bästa ekonomi efter Brexit",
+     "u": "https://www.sverigesradio.se/artikel/9347008",
+     "d": "2026-11-24T05:09:00+00:00"
+    }
+   ]
+  },
+  {
+   "id": "fd7ce80974",
+   "title": "Rivers, 14, dog – nu stäms sociala medier-jättarna",
+   "summary": "",
+   "updated": "2026-11-23T04:57:14+00:00",
+   "articles": [
+    {
+     "s": "gp",
+     "t": "Rivers, 14, dog – nu stäms sociala medier-jättarna",
+     "u": "https://www.gp.se/nyheter/varlden/rivers-14-dog-nu-stams-sociala-medier-jattarna.f4f9f87d-e578-5112-a091-dadf5bead31c",
+     "d": "2026-11-23T04:57:14+00:00"
+    }
+   ]
+  },
+  {
+   "id": "190b80082a",
+   "title": "Hög chef stämmer Volvo Cars på miljoner: ”Trakasserades”",
+   "summary": "",
+   "updated": "2026-11-23T04:50:03+00:00",
+   "articles": [
+    {
+     "s": "gp",
+     "t": "Hög chef stämmer Volvo Cars på miljoner: ”Trakasserades”",
+     "u": "https://www.gp.se/ekonomi/sparkad-volvo-cars-chef-stammer-foretaget-pa-miljoner-hade-ansvar-for-ex60.afd3917e-2f86-52e6-af29-3983fc603fa2",
+     "d": "2026-11-23T04:50:03+00:00"
+    }
+   ]
+  },
+  {
+   "id": "51805ef729",
+   "title": "Johan Ingerö Alias: 2027 kan EU bli omöjligt att styra",
+   "summary": "",
+   "updated": "2026-11-23T04:00:00+00:00",
+   "articles": [
+    {
+     "s": "gp",
+     "t": "Johan Ingerö Alias: 2027 kan EU bli omöjligt att styra",
+     "u": "https://www.gp.se/asikt-och-debatt/ledare/gastkolumn/2027-kan-eu-bli-omojligt-att-styra.d836f8cb-5086-5c10-a666-686c3651678c",
+     "d": "2026-11-23T04:00:00+00:00"
+    }
+   ]
+  },
+  {
+   "id": "2edc5d7fbf",
+   "title": "Har AI ens i klassrummet att göra?",
+   "summary": "",
+   "updated": "2026-11-23T06:00:00+00:00",
+   "articles": [
+    {
+     "s": "gp",
+     "t": "Har AI ens i klassrummet att göra?",
+     "u": "https://www.gp.se/asikt-och-debatt/fria-ord/har-ai-ens-i-klassrummet-att-gora.fcc3e3a3-d7f4-55b2-bd2d-d13abb8b7a6d",
+     "d": "2026-11-23T06:00:00+00:00"
+    }
+   ]
+  },
+  {
+   "id": "41da9b03dd",
+   "title": "Kontrollera, skrämma och splittra – därför fängslar Israel palestinier",
+   "summary": "",
+   "updated": "2026-11-24T05:00:00+00:00",
+   "articles": [
+    {
+     "s": "etc",
+     "t": "Kontrollera, skrämma och splittra – därför fängslar Israel palestinier",
+     "u": "https://www.etc.se/utrikes/kontrollera-skraemma-och-splittra-daerfoer-faengslar-israel-palestinier?utm_source=rss",
+     "d": "2026-11-24T05:00:00+00:00"
+    }
+   ]
+  },
+  {
+   "id": "58fdd1ae43",
+   "title": "Greta Thunberg döms för aktioner i Köpenhamn",
+   "summary": "",
+   "updated": "2026-11-23T12:40:00+00:00",
+   "articles": [
+    {
+     "s": "etc",
+     "t": "Greta Thunberg döms för aktioner i Köpenhamn",
+     "u": "https://www.etc.se/inrikes/danmark-thunberg-1?utm_source=rss",
+     "d": "2026-11-23T12:40:00+00:00"
+    }
+   ]
+  },
+  {
+   "id": "50c9e0952f",
+   "title": "Mullvadsmannen sponsrade Örebropartiet – skyldig staten 108 miljoner",
+   "summary": "",
+   "updated": "2026-11-23T11:30:00+00:00",
+   "articles": [
+    {
+     "s": "etc",
+     "t": "Mullvadsmannen sponsrade Örebropartiet – skyldig staten 108 miljoner",
+     "u": "https://www.etc.se/inrikes/mullvad-grundarens-enorma-skattesmaellen-108-miljoner?utm_source=rss",
+     "d": "2026-11-23T11:30:00+00:00"
+    }
+   ]
+  },
+  {
+   "id": "abca552025",
+   "title": "Populär skönhetsbehandling kan ge brännsår och nervskador",
+   "summary": "",
+   "updated": "2026-11-23T14:20:00+00:00",
+   "articles": [
+    {
+     "s": "etc",
+     "t": "Populär skönhetsbehandling kan ge brännsår och nervskador",
+     "u": "https://www.etc.se/inrikes/populaer-skoenhetsbehandling-kan-ge-braennsaar-och-nervskador?utm_source=rss",
+     "d": "2026-11-23T14:20:00+00:00"
+    }
+   ]
+  },
+  {
+   "id": "656e072782",
+   "title": "Bekräftat: Den invasiva ”havsspyan” har spridit sig",
+   "summary": "",
+   "updated": "2026-11-23T13:20:00+00:00",
+   "articles": [
+    {
+     "s": "etc",
+     "t": "Bekräftat: Den invasiva ”havsspyan” har spridit sig",
+     "u": "https://www.etc.se/klimat-miljo/bekraeftat-den-invasiva-havsspyan-har-spridit-sig?utm_source=rss",
+     "d": "2026-11-23T13:20:00+00:00"
+    }
+   ]
+  },
+  {
+   "id": "468558fcc1",
+   "title": "Vi patienter blir förlorare om Kry:s affär godkänns",
+   "summary": "",
+   "updated": "2026-11-23T07:20:00+00:00",
+   "articles": [
+    {
+     "s": "etc",
+     "t": "Vi patienter blir förlorare om Kry:s affär godkänns",
+     "u": "https://www.etc.se/ledare/vi-patienter-blir-foerlorare-om-kry-s-affaer-godkaenns?utm_source=rss",
+     "d": "2026-11-23T07:20:00+00:00"
+    }
+   ]
+  },
+  {
+   "id": "5cb345b23d",
+   "title": "Facktopp köptes ut för nästan 9 miljoner",
+   "summary": "",
+   "updated": "2026-11-24T06:42:07+00:00",
+   "articles": [
+    {
+     "s": "arbetet",
+     "t": "Facktopp köptes ut för nästan 9 miljoner",
+     "u": "https://arbetet.se/2026/11/24/facktopp-koptes-ut-for-nastan-9-miljoner/",
+     "d": "2026-11-24T06:42:07+00:00"
+    }
+   ]
+  },
+  {
+   "id": "0bc1ee338a",
+   "title": "Personliga assistenten Lena Ahlgren Johansson får Ivar Lo-priset: ”Rörd och stolt”",
+   "summary": "",
+   "updated": "2026-11-24T06:27:21+00:00",
+   "articles": [
+    {
+     "s": "arbetet",
+     "t": "Personliga assistenten Lena Ahlgren Johansson får Ivar Lo-priset: ”Rörd och stolt”",
+     "u": "https://arbetet.se/2026/11/24/personliga-assistenten-lena-ahlgren-johansson-far-ivar-lo-priset-rord-och-stolt/",
+     "d": "2026-11-24T06:27:21+00:00"
+    }
+   ]
+  },
+  {
+   "id": "d74985f845",
+   "title": "Ska man kunna tjäna pengar på dödshjälp, Centerpartiet?",
+   "summary": "",
+   "updated": "2026-11-24T06:00:00+00:00",
+   "articles": [
+    {
+     "s": "arbetet",
+     "t": "Ska man kunna tjäna pengar på dödshjälp, Centerpartiet?",
+     "u": "https://arbetet.se/2026/11/24/ska-man-kunna-tjana-pengar-pa-dodshjalp-centerpartiet/",
+     "d": "2026-11-24T06:00:00+00:00"
+    }
+   ]
+  },
+  {
+   "id": "0527eb4f8b",
+   "title": "Kriminalvården hinner inte spendera miljarden – facket oroliga för utvecklingen",
+   "summary": "",
+   "updated": "2026-11-23T14:27:08+00:00",
+   "articles": [
+    {
+     "s": "arbetet",
+     "t": "Kriminalvården hinner inte spendera miljarden – facket oroliga för utvecklingen",
+     "u": "https://arbetet.se/2026/11/23/kriminalvarden-hinner-inte-spendera-pengar-kan-behova-betala-tillbaka-miljard/",
+     "d": "2026-11-23T14:27:08+00:00"
+    }
+   ]
+  },
+  {
+   "id": "993e4f8a07",
+   "title": "Värnpliktig skjuten under militärövning",
+   "summary": "",
+   "updated": "2026-11-23T12:56:26+00:00",
+   "articles": [
+    {
+     "s": "arbetet",
+     "t": "Värnpliktig skjuten under militärövning",
+     "u": "https://arbetet.se/2026/11/23/varnpliktig-skjuten-under-militarovning/",
+     "d": "2026-11-23T12:56:26+00:00"
+    }
+   ]
+  },
+  {
+   "id": "740138be38",
+   "title": "Le Pen: ”Tredje världskriget” om Nato går in i Ukraina",
+   "summary": "",
+   "updated": "2026-11-24T07:08:02+00:00",
+   "articles": [
+    {
+     "s": "friatider",
+     "t": "Le Pen: ”Tredje världskriget” om Nato går in i Ukraina",
+     "u": "https://www.friatider.se/le-pen-tredje-varldskriget-om-nato-gar-i-ukraina",
+     "d": "2026-11-24T07:08:02+00:00"
+    }
+   ]
+  },
+  {
+   "id": "40f240e2c2",
+   "title": "Här får Sveriges ambassadör möta Kim Jong Un",
+   "summary": "",
+   "updated": "2026-11-23T17:28:39+00:00",
+   "articles": [
+    {
+     "s": "friatider",
+     "t": "Här får Sveriges ambassadör möta Kim Jong Un",
+     "u": "https://www.friatider.se/har-far-sveriges-ambassador-mota-kim-jong-un",
+     "d": "2026-11-23T17:28:39+00:00"
+    }
+   ]
+  },
+  {
+   "id": "73d197dd92",
+   "title": "Mette-Marit nobbar Epstein-kommission – efter råd från statsministern",
+   "summary": "",
+   "updated": "2026-11-23T15:24:57+00:00",
+   "articles": [
+    {
+     "s": "friatider",
+     "t": "Mette-Marit nobbar Epstein-kommission – efter råd från statsministern",
+     "u": "https://www.friatider.se/mette-marit-nobbar-epstein-kommission-efter-rad-fran-statsministern",
+     "d": "2026-11-23T15:24:57+00:00"
+    }
+   ]
+  },
+  {
+   "id": "206b967458",
+   "title": "Här spränger Ukraina fartyget – i Libyen",
+   "summary": "",
+   "updated": "2026-11-23T11:51:48+00:00",
+   "articles": [
+    {
+     "s": "friatider",
+     "t": "Här spränger Ukraina fartyget – i Libyen",
+     "u": "https://www.friatider.se/har-spranger-ukraina-fartyget-i-libyen",
+     "d": "2026-11-23T11:51:48+00:00"
+    }
+   ]
+  },
+  {
+   "id": "c9b335a29f",
+   "title": "AFS rusar i opinionen – har över en procent",
+   "summary": "",
+   "updated": "2026-11-23T10:19:42+00:00",
+   "articles": [
+    {
+     "s": "friatider",
+     "t": "AFS rusar i opinionen – har över en procent",
+     "u": "https://www.friatider.se/afs-rusar-i-opinionen-har-over-en-procent",
+     "d": "2026-11-23T10:19:42+00:00"
+    }
+   ]
+  },
+  {
+   "id": "854b59b1d6",
+   "title": "Ryssland stänger luftrum över Kaliningrad – Litauen förnekar attack",
+   "summary": "",
+   "updated": "2026-11-22T11:14:53+00:00",
+   "articles": [
+    {
+     "s": "friatider",
+     "t": "Ryssland stänger luftrum över Kaliningrad – Litauen förnekar attack",
+     "u": "https://www.friatider.se/ryssland-stanger-luftrum-over-kaliningrad-litauen-fornekar-attack",
+     "d": "2026-11-22T11:14:53+00:00"
+    }
+   ]
+  },
+  {
+   "id": "0dce19c0bd",
+   "title": "Svensk batterijätte i konkurs – 2,5 pensionsmiljarder borta",
+   "summary": "",
+   "updated": "2026-11-22T10:00:48+00:00",
+   "articles": [
+    {
+     "s": "friatider",
+     "t": "Svensk batterijätte i konkurs – 2,5 pensionsmiljarder borta",
+     "u": "https://www.friatider.se/svensk-batterijatte-i-konkurs-25-pensionsmiljarder-borta",
+     "d": "2026-11-22T10:00:48+00:00"
+    }
+   ]
+  },
+  {
+   "id": "a3ea4a9aa7",
+   "title": "Vad betyder folkmordsdomen mot Myanmar för Israel?",
+   "summary": "",
+   "updated": "2026-11-23T00:30:25+00:00",
+   "articles": [
+    {
+     "s": "arena",
+     "t": "Vad betyder folkmordsdomen mot Myanmar för Israel?",
+     "u": "https://www.dagensarena.se/innehall/vad-betyder-folkmordsdomen-mot-myanmar-israel/",
+     "d": "2026-11-23T00:30:25+00:00"
+    }
+   ]
+  },
+  {
+   "id": "38a3db89a8",
+   "title": "Larmen om AI och ungas jobb vilar på skakig grund",
+   "summary": "",
+   "updated": "2026-11-22T19:00:24+00:00",
+   "articles": [
+    {
+     "s": "arena",
+     "t": "Larmen om AI och ungas jobb vilar på skakig grund",
+     "u": "https://www.dagensarena.se/opinion/larmen-om-ai-och-ungas-jobb-vilar-pa-skakig-grund/",
+     "d": "2026-11-22T19:00:24+00:00"
+    }
+   ]
+  },
+  {
+   "id": "882c4de454",
+   "title": "Risk att nya myndigheten försämrar miljöprövningen",
+   "summary": "",
+   "updated": "2026-11-24T04:00:00+00:00",
+   "articles": [
+    {
+     "s": "altinget",
+     "t": "Risk att nya myndigheten försämrar miljöprövningen",
+     "u": "https://www.altinget.se/artikel/risk-att-nya-myndigheten-forsamrar-miljoprovningen",
+     "d": "2026-11-24T04:00:00+00:00"
+    }
+   ]
+  },
+  {
+   "id": "291ea964c9",
+   "title": "”Nästa steg blir att Sverige lämnar Ottawafördraget”",
+   "summary": "",
+   "updated": "2026-11-20T13:40:00+00:00",
+   "articles": [
+    {
+     "s": "altinget",
+     "t": "”Nästa steg blir att Sverige lämnar Ottawafördraget”",
+     "u": "https://www.altinget.se/artikel/nasta-steg-blir-nog-att-sverige-lamnar-ottawakonventionen",
+     "d": "2026-11-20T13:40:00+00:00"
+    }
+   ]
+  },
+  {
+   "id": "4f597a3145",
+   "title": "Smittrisk vid tandvårdsbesök – erbjuds hivtest",
+   "summary": "",
+   "updated": "2026-11-24T05:11:00+00:00",
+   "articles": [
+    {
+     "s": "corren",
+     "t": "Smittrisk vid tandvårdsbesök – erbjuds hivtest",
+     "u": "https://www.corren.se/nyheter/inrikes/vard/artikel/smittrisk-vid-tandvardsbesok-erbjuds-hivtest/r23k6mxl",
+     "d": "2026-11-24T05:11:00+00:00"
+    }
+   ]
+  },
+  {
+   "id": "0ab7a95ac8",
+   "title": "Myndighet: Risk för omotiverat höga elnätsavgifter",
+   "summary": "",
+   "updated": "2026-11-24T05:11:00+00:00",
+   "articles": [
+    {
+     "s": "corren",
+     "t": "Myndighet: Risk för omotiverat höga elnätsavgifter",
+     "u": "https://www.corren.se/ekonomi/artikel/myndighet-risk-for-omotiverat-hoga-elnatsavgifter/l61kovvj",
+     "d": "2026-11-24T05:11:00+00:00"
+    }
+   ]
+  },
+  {
+   "id": "fd9ec318b7",
+   "title": "De har gått ihop – när det verkar omöjligt i Stockholm",
+   "summary": "",
+   "updated": "2026-11-23T16:00:00+00:00",
+   "articles": [
+    {
+     "s": "nt",
+     "t": "De har gått ihop – när det verkar omöjligt i Stockholm",
+     "u": "https://www.nt.se/nyheter/norrkoping/artikel/rodgrona-partier-kommer-lattare-overens-i-norrkoping/r23k3epl",
+     "d": "2026-11-23T16:00:00+00:00"
+    }
+   ]
+  },
+  {
+   "id": "682fdb531c",
+   "title": "Gen Z i protest: ”Det spelar ingen roll hur mycket det snöar”",
+   "summary": "",
+   "updated": "2026-11-21T12:28:26+00:00",
+   "articles": [
+    {
+     "s": "flamman",
+     "t": "Gen Z i protest: ”Det spelar ingen roll hur mycket det snöar”",
+     "u": "https://www.flamman.se/gen-z-i-protest-det-spelar-ingen-roll-hur-mycket-det-snoar/",
+     "d": "2026-11-21T12:28:26+00:00"
+    }
+   ]
+  },
+  {
+   "id": "5bcc5c950f",
+   "title": "M-kuppen i Gävle: Bornegrim tar posten – S och M ska styra",
+   "summary": "M-ledaren Paula Larsson förbigicks när partikamraten Niclas Bornegrim valdes till vice ordförande i kommunledningen, något Larsson kallar en kupp. Efter vändningen ska S och M styra Gävle tillsammans.",
+   "updated": "2026-11-23T17:58:00+00:00",
+   "articles": [
+    {
+     "s": "p4-gavleborg",
+     "t": "Efter oväntade M-vändningen – så ska S och M styra i Gävle",
+     "u": "https://www.sverigesradio.se/artikel/9348350",
+     "d": "2026-11-23T17:58:00+00:00"
+    },
+    {
+     "s": "p4-gavleborg",
+     "t": "Efter M-kuppen i Gävle – detta ligger bakom striden",
+     "u": "https://www.sverigesradio.se/artikel/9347448",
+     "d": "2026-11-20T19:54:00+00:00"
+    },
+    {
+     "s": "svt-gavleborg",
+     "t": "Snuvades på kommunpost – ”Hugger sin ledare i ryggen”",
+     "u": "https://www.svt.se/nyheter/lokalt/gavleborg/snuvades-pa-kommunpost-hugger-sin-ledare-i-ryggen",
+     "d": "2026-11-20T15:17:36+00:00"
+    },
+    {
+     "s": "svt-gavleborg",
+     "t": "Nya moderattoppen Niclas Bornegrim: ”Olyckligt när man inte stöttar laget”",
+     "u": "https://www.svt.se/nyheter/lokalt/gavleborg/nya-moderattoppen-niclas-bornegrim-olyckligt-nar-man-inte-stottar-laget",
+     "d": "2026-11-19T16:04:56+00:00"
+    }
+   ]
+  },
+  {
+   "id": "6fc05aa29c",
+   "title": "Störningar i fjärrvärmen i hela Gävle",
+   "summary": "Fjärrvärmen i Gävle drabbades av driftstörningar som påverkade hela staden. Felet är nu åtgärdat.",
+   "updated": "2026-11-22T17:30:00+00:00",
+   "articles": [
+    {
+     "s": "p4-gavleborg",
+     "t": "Störningar på fjärrvärmen i Gävle",
+     "u": "https://www.sverigesradio.se/artikel/9347930",
+     "d": "2026-11-22T17:30:00+00:00"
+    },
+    {
+     "s": "svt-gavleborg",
+     "t": "Störningar i fjärrvärmen åtgärdade – efter påverkan i hela Gävle",
+     "u": "https://www.svt.se/nyheter/lokalt/gavleborg/driftstorningar-pa-fjarrvarmen-i-hela-gavle",
+     "d": "2026-11-22T15:06:52+00:00"
+    }
+   ]
+  },
+  {
+   "id": "c6d31c2494",
+   "title": "Skolvolontärer ger utbyte mellan generationer i Ljusdal",
+   "summary": "",
+   "updated": "2026-11-23T04:30:01+00:00",
+   "articles": [
+    {
+     "s": "svt-gavleborg",
+     "t": "Skolvolontärsinitiativ ger utbyte mellan generationer i Ljusdal",
+     "u": "https://www.svt.se/nyheter/lokalt/gavleborg/skolvolontarsinitiativ-ger-utbyte-mellan-generationer-i-ljusdal",
+     "d": "2026-11-23T04:30:01+00:00"
+    },
+    {
+     "s": "svt-gavleborg",
+     "t": "Janne, 63, om att vara volontär i skolan: ”Kan lära mycket av varandra”",
+     "u": "https://www.svt.se/nyheter/lokalt/gavleborg/janne63-om-att-vara-volontar-i-skolan-kan-lara-mycket-av-varandra",
+     "d": "2026-11-23T04:30:01+00:00"
+    }
+   ]
+  },
+  {
+   "id": "faebd194dc",
+   "title": "Larm om övertänd bil i Nordanstig",
+   "summary": "",
+   "updated": "2026-11-24T05:39:04+00:00",
+   "articles": [
+    {
+     "s": "svt-gavleborg",
+     "t": "Larm om övertänd bil i Nordanstig",
+     "u": "https://www.svt.se/nyheter/lokalt/gavleborg/larm-om-overtand-bil-i-nordanstig",
+     "d": "2026-11-24T05:39:04+00:00"
+    }
+   ]
+  },
+  {
+   "id": "35c3905fb7",
+   "title": "Malin vill skydda tystnaden och stjärnhimlen – från vindkraftverk",
+   "summary": "",
+   "updated": "2026-11-24T04:30:09+00:00",
+   "articles": [
+    {
+     "s": "svt-gavleborg",
+     "t": "Malin vill skydda tystnaden och stjärnhimlen – från vindkraftverk",
+     "u": "https://www.svt.se/nyheter/lokalt/gavleborg/malin-vill-skydda-tystnaden-och-stjarnhimlen-fran-vindkraftverk",
+     "d": "2026-11-24T04:30:09+00:00"
+    }
+   ]
+  },
+  {
+   "id": "d73571e203",
+   "title": "Bollnäs bostäder vill inte ta ner kamera – trots bakläxa",
+   "summary": "",
+   "updated": "2026-11-23T12:57:03+00:00",
+   "articles": [
+    {
+     "s": "svt-gavleborg",
+     "t": "Bollnäs bostäder vill inte ta ner kamera – trots bakläxa",
+     "u": "https://www.svt.se/nyheter/lokalt/gavleborg/bollnas-bostader-vill-inte-ta-ner-kamera-trots-baklaxa",
+     "d": "2026-11-23T12:57:03+00:00"
+    }
+   ]
+  },
+  {
+   "id": "26f5bcb02c",
+   "title": "Olycka med lastbil strax utanför Ilsbo",
+   "summary": "",
+   "updated": "2026-11-23T06:06:23+00:00",
+   "articles": [
+    {
+     "s": "svt-gavleborg",
+     "t": "Olycka med lastbil strax utanför Ilsbo",
+     "u": "https://www.svt.se/nyheter/lokalt/gavleborg/olycka-med-lastbil-strax-utanfor-ilsbo",
+     "d": "2026-11-23T06:06:23+00:00"
+    }
+   ]
+  },
+  {
+   "id": "7a8b3f5cb9",
+   "title": "Vill bygga bostäder vid gasklockorna – utan risk för klagomål på hög musik",
+   "summary": "",
+   "updated": "2026-11-22T04:30:00+00:00",
+   "articles": [
+    {
+     "s": "svt-gavleborg",
+     "t": "Vill bygga bostäder vid gasklockorna – utan risk för klagomål på hög musik",
+     "u": "https://www.svt.se/nyheter/lokalt/gavleborg/vill-bygga-bostader-vid-gasklockorna-utan-risk-for-klagomal-pa-hog-musik",
+     "d": "2026-11-22T04:30:00+00:00"
+    }
+   ]
+  },
+  {
+   "id": "dd2af7c2f4",
+   "title": "Samtala om nätvanor utan att döma – så kan du nå ut till ditt barn",
+   "summary": "",
+   "updated": "2026-11-21T04:30:04+00:00",
+   "articles": [
+    {
+     "s": "svt-gavleborg",
+     "t": "Samtala om nätvanor utan att döma – så kan du nå ut till ditt barn",
+     "u": "https://www.svt.se/nyheter/lokalt/gavleborg/samtala-om-natvanor-utan-att-doma-sa-kan-du-na-ut-till-ditt-barn",
+     "d": "2026-11-21T04:30:04+00:00"
+    }
+   ]
+  },
+  {
+   "id": "3a3f8a06b6",
+   "title": "Familj drev illegal tobaksfabrik i villa – sonen förgiftades",
+   "summary": "",
+   "updated": "2026-11-20T16:06:48+00:00",
+   "articles": [
+    {
+     "s": "svt-gavleborg",
+     "t": "Familj drev illegal tobaksfabrik i villa – sonen förgiftades",
+     "u": "https://www.svt.se/nyheter/lokalt/gavleborg/familj-drev-illegal-tobaksfabrik-i-villa-sonen-forgiftades",
+     "d": "2026-11-20T16:06:48+00:00"
+    }
+   ]
+  },
+  {
+   "id": "72105149f2",
+   "title": "Stopp i tågtrafiken mellan Gävle och Sandviken",
+   "summary": "",
+   "updated": "2026-11-20T06:50:54+00:00",
+   "articles": [
+    {
+     "s": "svt-gavleborg",
+     "t": "Stopp i tågtrafiken mellan Gävle och Sandviken",
+     "u": "https://www.svt.se/nyheter/lokalt/gavleborg/stopp-i-tagtrafiken-mellan-gavle-och-sandviken",
+     "d": "2026-11-20T06:50:54+00:00"
+    }
+   ]
+  },
+  {
+   "id": "810cdbe752",
+   "title": "Varning för hårda vindar längs Gävleborgskusten",
+   "summary": "",
+   "updated": "2026-11-20T06:33:54+00:00",
+   "articles": [
+    {
+     "s": "svt-gavleborg",
+     "t": "Varning för hårda vindar längs Gävleborgskusten",
+     "u": "https://www.svt.se/nyheter/lokalt/gavleborg/varning-for-harda-vindar-langs-gavleborgskusten",
+     "d": "2026-11-20T06:33:54+00:00"
+    }
+   ]
+  },
+  {
+   "id": "02c1e4344c",
+   "title": "Pojke tog med sig kniv till innebandycup – döms",
+   "summary": "",
+   "updated": "2026-11-24T05:57:00+00:00",
+   "articles": [
+    {
+     "s": "p4-gavleborg",
+     "t": "Pojke tog med sig kniv till innebandycup – döms",
+     "u": "https://www.sverigesradio.se/artikel/9348298",
+     "d": "2026-11-24T05:57:00+00:00"
+    }
+   ]
+  },
+  {
+   "id": "68a5b59dd6",
+   "title": "Evy och Berit shoppar loss på Black Week: ”Har nio barnbarn”",
+   "summary": "",
+   "updated": "2026-11-24T04:50:00+00:00",
+   "articles": [
+    {
+     "s": "p4-gavleborg",
+     "t": "Evy och Berit shoppar loss på Black Week: ”Har nio barnbarn”",
+     "u": "https://www.sverigesradio.se/artikel/9348344",
+     "d": "2026-11-24T04:50:00+00:00"
+    }
+   ]
+  },
+  {
+   "id": "297bf747fb",
+   "title": "Minutscheman i omsorgen ska bort – och Älvhallarna får vänta",
+   "summary": "",
+   "updated": "2026-11-23T20:45:00+00:00",
+   "articles": [
+    {
+     "s": "p4-gavleborg",
+     "t": "Minutscheman i omsorgen ska bort – och Älvhallarna får vänta",
+     "u": "https://www.sverigesradio.se/artikel/9348571",
+     "d": "2026-11-23T20:45:00+00:00"
+    }
+   ]
+  },
+  {
+   "id": "7e22e60e1e",
+   "title": "Polisen: ”Vi har ganska bra koll på alias som rekryterar”",
+   "summary": "",
+   "updated": "2026-11-23T19:55:00+00:00",
+   "articles": [
+    {
+     "s": "p4-gavleborg",
+     "t": "Polisen: ”Vi har ganska bra koll på alias som rekryterar”",
+     "u": "https://www.sverigesradio.se/artikel/9348491",
+     "d": "2026-11-23T19:55:00+00:00"
+    }
+   ]
+  },
+  {
+   "id": "d181fdccc8",
+   "title": "Fastighetsbolaget öppnar dörren: Välkomnar byggelever",
+   "summary": "",
+   "updated": "2026-11-23T18:55:00+00:00",
+   "articles": [
+    {
+     "s": "p4-gavleborg",
+     "t": "Fastighetsbolaget öppnar dörren: Välkomnar byggelever",
+     "u": "https://www.sverigesradio.se/artikel/9348091",
+     "d": "2026-11-23T18:55:00+00:00"
+    }
+   ]
+  },
+  {
+   "id": "a08c3d8584",
+   "title": "Lenningebron avstängd fram till fredag – ska repareras",
+   "summary": "",
+   "updated": "2026-11-23T16:53:00+00:00",
+   "articles": [
+    {
+     "s": "p4-gavleborg",
+     "t": "Lenningebron avstängd fram till fredag – ska repareras",
+     "u": "https://www.sverigesradio.se/artikel/9348576",
+     "d": "2026-11-23T16:53:00+00:00"
+    }
+   ]
+  },
+  {
+   "id": "de58232eb0",
+   "title": "Inställda skolbussar i Älvkarleby",
+   "summary": "",
+   "updated": "2026-11-23T07:42:00+00:00",
+   "articles": [
+    {
+     "s": "p4-gavleborg",
+     "t": "Inställda skolbussar i Älvkarleby",
+     "u": "https://www.sverigesradio.se/artikel/9348040",
+     "d": "2026-11-23T07:42:00+00:00"
+    }
+   ]
+  },
+  {
+   "id": "dbe0edb8a9",
+   "title": "Lurade till sig klocka för 50 000 – med falskt körkort",
+   "summary": "",
+   "updated": "2026-11-23T06:00:00+00:00",
+   "articles": [
+    {
+     "s": "p4-gavleborg",
+     "t": "Lurade till sig klocka för 50 000 – med falskt körkort",
+     "u": "https://www.sverigesradio.se/artikel/9347850",
+     "d": "2026-11-23T06:00:00+00:00"
+    }
+   ]
+  },
+  {
+   "id": "c16bc34021",
+   "title": "Färgmissen på kyrkan: 70 000 fasadspån fick skrapas",
+   "summary": "",
+   "updated": "2026-11-22T06:27:00+00:00",
+   "articles": [
+    {
+     "s": "p4-gavleborg",
+     "t": "Färgmissen på kyrkan: 70 000 fasadspån fick skrapas",
+     "u": "https://www.sverigesradio.se/artikel/9344409",
+     "d": "2026-11-22T06:27:00+00:00"
+    }
+   ]
+  },
+  {
+   "id": "5c92ffb807",
+   "title": "Mona, 76 år, drömmer om ett gym i Sätra igen",
+   "summary": "",
+   "updated": "2026-11-22T06:00:00+00:00",
+   "articles": [
+    {
+     "s": "p4-gavleborg",
+     "t": "Mona, 76 år, drömmer om ett gym i Sätra igen",
+     "u": "https://www.sverigesradio.se/artikel/9347369",
+     "d": "2026-11-22T06:00:00+00:00"
+    }
+   ]
+  },
+  {
+   "id": "8200ce9228",
+   "title": "Språkresans mardrömsboende – Siri blev allvarligt sjuk",
+   "summary": "",
+   "updated": "2026-11-22T04:54:00+00:00",
+   "articles": [
+    {
+     "s": "p4-gavleborg",
+     "t": "Språkresans mardrömsboende – Siri blev allvarligt sjuk",
+     "u": "https://www.sverigesradio.se/artikel/9346583",
+     "d": "2026-11-22T04:54:00+00:00"
+    }
+   ]
+  },
+  {
+   "id": "b8f0abe2b1",
+   "title": "Linnéas ilska efter uttalandet om datacenter: ”Provocerad”",
+   "summary": "",
+   "updated": "2026-11-21T04:58:00+00:00",
+   "articles": [
+    {
+     "s": "p4-gavleborg",
+     "t": "Linnéas ilska efter uttalandet om datacenter: ”Provocerad”",
+     "u": "https://www.sverigesradio.se/artikel/9345577",
+     "d": "2026-11-21T04:58:00+00:00"
+    }
+   ]
+  }
+ ]
+}
