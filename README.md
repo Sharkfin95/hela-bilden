@@ -58,12 +58,33 @@ GD och Arbetarbladet ligger på Bonnier News Locals gemensamma plattform. Flöde
 
 ## Om grupperingen
 
-Skriptet grupperar artiklar efter hur lika deras rubriker och ingresser är (TF-IDF). Det är snabbt och kräver inga externa tjänster, men missar ibland kopplingar, särskilt för ledare och krönikor med kreativa rubriker. Höj eller sänk `threshold` i `cluster()` för att få större eller mindre grupper.
+Skriptet grupperar artiklar efter hur lika deras rubriker och ingresser är (TF-IDF). Två spärrar minskar felaktiga ihopslagningar:
 
-Vill du ha bättre gruppering och sammanfattningar som på Ground News kan nästa steg vara att låta en språkmodell gruppera rubrikerna och skriva en neutral sammanfattning per händelse. Fältet `summary` i news.json finns redan och visas på sidan om det är ifyllt.
+- **Siffror räknas.** Har två rubriker siffror som inte stämmer överens, till exempel olika priser, kvadratmeter eller antal, sänks likheten kraftigt. Därför hamnar inte två olika husförsäljningar ihop bara för att rubrikerna följer samma mall.
+- **Lokalt hålls lokalt.** En artikel från en lokal källa slås bara ihop med riksmedier eller med en annan ort om rubrikerna är mycket lika, till exempel när samma TT-text ligger i flera tidningar.
+
+Inställningarna finns överst i `scripts/fetch_news.py`: `THRESHOLD`, `CROSS_THRESHOLD` och `NUMBER_PENALTY`. Höj värdena för färre men säkrare grupper, sänk dem för fler.
+
+Grupperingen är fortfarande ungefärlig och missar ibland kopplingar, särskilt för ledare och krönikor med kreativa rubriker. Vill du ha bättre gruppering och sammanfattningar som på Ground News kan nästa steg vara att låta en språkmodell gruppera rubrikerna och skriva en neutral sammanfattning per händelse. Fältet `summary` i news.json visas på sidan om det är ifyllt.
+
+### Filtrera bort automatiska artiklar
+
+Lokaltidningar publicerar många automatiskt skrivna notiser om husförsäljningar. Vill du slippa dem, lägg till ett mönster i `exclude_title_patterns` i `sources.json`:
+
+```json
+"exclude_title_patterns": ["(villa|radhus|kedjehus|parhus|bostadsrätt|lägenhet|fritidshus|hus)\\b.*\\b(såld|sålt|gick för)"]
+```
+
+## Bilder
+
+Varje händelse visar en bild med källangivelse, och bilden länkar till artikeln den kommer från. Skriptet tar bilden ur RSS-flödet när den finns där (Ekot, ETC och GP har bilder i sina flöden). För händelser som saknar bild hämtar det artikelns delningsbild, alltså den bild som visas när någon delar länken. SVT:s flöde saknar till exempel bilder, så där behövs delningsbilden.
+
+- `og_image_lookups` i `sources.json` styr hur många artikelsidor som högst kontrolleras per körning. Händelser med flest källor kommer först. Sätt värdet till `0` för att bara använda bilder ur flödena.
+- Bilderna visas direkt från källornas egna servrar och sparas inte någonstans. Om en bild inte går att ladda döljs den.
+- Actions-loggen visar hur många artiklar med bild varje källa gav.
 
 ## Viktigt om klassningen
 
 Placeringen bygger på ledarsidans egen politiska beteckning och gäller inte nyhetsjournalistiken, som formellt är fristående. Stapeln visar vilka sorters källor som tar upp en händelse, inte att en enskild artikel är vinklad. Besökare kan ändra klassningen för sin egen del under fliken Källor.
 
-Sidan visar bara rubriker med länk till originalartikeln, på samma sätt som andra nyhetsaggregatorer. Kontrollera gärna varje källas villkor för RSS-flödet om sidan ska användas offentligt eller kommersiellt.
+Sidan visar rubriker och bilder med länk till originalartikeln, på samma sätt som andra nyhetsaggregatorer. Kontrollera gärna varje källas villkor för RSS-flödet om sidan ska användas offentligt eller kommersiellt.
