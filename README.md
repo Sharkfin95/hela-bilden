@@ -46,6 +46,17 @@ Lägg till en rad i `sources.json`:
 
 `lean` är placeringen: −3 långt vänster, −2 vänster, −1 lutar vänster, 0 mitten, 1 lutar höger, 2 höger, 3 långt höger. Sätt `"enabled": false` för att pausa en källa. Lägg gärna till ett kort namn för källan i `SHORT` i `site/index.html`.
 
+### Europa och USA
+
+Flikarna Europa och USA visar engelskspråkiga källor. De har inga deklarerade ledarbeteckningar som svenska tidningar, så placeringen bygger på AllSides Media Bias Ratings. Översättningen är: Left = −2, Lean Left = −1, Center = 0, Lean Right = 1, Right = 2.
+
+- **Europa:** The Guardian, The Independent, BBC News, Euronews, DW, The Telegraph, Daily Mail och GB News.
+- **USA:** HuffPost, The New York Times, NPR, The Washington Post, The Wall Street Journal, The Hill, The Washington Times, New York Post, Fox News och Breitbart.
+
+Utländska artiklar grupperas aldrig ihop med svenska, eftersom källorna mäts på olika politiska skalor. Fältet `regions` i `sources.json` styr flikarnas ordning, typ (`utland` eller `lokalt`) och introtext.
+
+Flödesadresserna är hämtade från källornas egna sidor och från RSS-katalogen Feeder. Kontrollera i Actions-loggen efter första körningen att varje källa ger fler än 0 artiklar. Ger en källa 0 artiklar, sök på "källans namn RSS" och byt adressen i `sources.json`.
+
 ### Lokala källor
 
 Källor med fältet `"region"` får en egen flik på sidan. Gävle finns redan med: Gefle Dagblad (liberal), Arbetarbladet (socialdemokratisk), SVT Gävleborg och P4 Gävleborg. Lokala nyheter visas bara under den lokala fliken. På första sidan räknas de lokala källorna bara in när de skriver om samma händelse som riksmedierna.
