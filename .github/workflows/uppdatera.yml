@@ -2,7 +2,7 @@ name: Uppdatera nyheter
 
 on:
   schedule:
-    - cron: "*/30 * * * *"   # var 30:e minut (UTC)
+    - cron: "3-59/10 * * * *"   # var 30:e minut (UTC)
   workflow_dispatch:          # kör manuellt från fliken Actions
   push:
     branches: [main]
