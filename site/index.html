@@ -150,7 +150,7 @@ pre,.scroll{overflow-x:auto}
  <div class="wrap">
   <div class="mast">
    <h1>Hela bilden</h1>
-   <p>Svenska nyheter – och vem som rapporterar dem, från vänster till höger</p>
+   <p>Nyheter från Sverige och världen – och vem som rapporterar dem, från vänster till höger</p>
    <span class="date" id="gen"></span>
   </div>
   <nav aria-label="Vyer">
@@ -192,7 +192,7 @@ pre,.scroll{overflow-x:auto}
 
  <section class="view" id="v-kallor" hidden>
   <h2>Källor och klassning</h2>
-  <p class="intro">Placeringen bygger på hur varje tidnings ledarsida själv beskriver sin politiska hållning. Håller du inte med? Ändra under ”Din klassning” – sidan räknar om alla staplar direkt. Ändringen sparas bara i din webbläsare.</p>
+  <p class="intro">Svenska källor placeras efter hur ledarsidan själv beskriver sin politiska hållning. Utländska källor placeras efter AllSides betyg. Håller du inte med? Ändra under ”Din klassning” – sidan räknar om alla staplar direkt. Ändringen sparas bara i din webbläsare.</p>
   <div class="scroll">
    <table class="stack">
     <thead><tr><th>Källa</th><th>Placering</th><th>Beteckning</th><th>Underlag</th><th>Din klassning</th><th>I urvalet</th></tr></thead>
@@ -204,7 +204,7 @@ pre,.scroll{overflow-x:auto}
 
  <section class="view prose" id="v-metod" hidden>
   <h2>Så fungerar Hela bilden</h2>
-  <p>Sidan samlar rubriker från svenska nyhetskällor, grupperar artiklar som handlar om samma händelse och visar hur täckningen fördelar sig mellan källor till vänster, i mitten och till höger.</p>
+  <p>Sidan samlar rubriker från svenska och utländska nyhetskällor, grupperar artiklar som handlar om samma händelse och visar hur täckningen fördelar sig mellan källor till vänster, i mitten och till höger.</p>
   <h3>Hur källorna placeras</h3>
   <p>Svensk press har en lång tradition av att ledarsidan deklarerar en politisk beteckning, till exempel ”oberoende liberal” eller ”obunden socialdemokratisk”. Hela bilden utgår från den egna beteckningen och placerar källan på en sjugradig skala:</p>
   <ul>
@@ -220,6 +220,9 @@ pre,.scroll{overflow-x:auto}
   <p>Klassningen gäller ledarsidan, inte nyhetsjournalistiken. Svenska nyhetsredaktioner är formellt fristående från ledarredaktionen. Stapeln visar alltså vilka <i>sorters</i> källor som tar upp en händelse, inte att en enskild artikel är vinklad. Varje källa räknas en gång per händelse, oavsett hur många artiklar den skrivit.</p>
   <h3>Gruppering och blinda fläckar</h3>
   <p>Artiklar grupperas efter hur lika deras rubriker och ingresser är. Rubriker med olika siffror, till exempel olika priser, hålls isär, och lokala artiklar slås bara ihop med riksmedier eller andra orter när rubrikerna är mycket lika. Metoden är enkel och missar ibland kopplingar, särskilt för ledare och krönikor med kreativa rubriker. En blind fläck är en händelse med minst två källor där minst hälften kommer från ena sidan och ingen från den andra.</p>
+  <h3>Utländska källor</h3>
+  <p>Europa- och USA-flikarna visar engelskspråkiga källor. De har inga deklarerade ledarbeteckningar som de svenska tidningarna, så placeringen bygger i stället på AllSides, en amerikansk organisation som betygsätter medier med blindtester bland läsare och granskning av en politiskt blandad expertpanel. AllSides fem steg översätts så här: Left blir Vänster, Lean Left blir Lutar vänster, Center blir Mitten, Lean Right blir Lutar höger och Right blir Höger.</p>
+  <p>Skalan utgår från amerikansk politik. Det som räknas som vänster i USA kan ligga nära mitten i Sverige. Därför slås utländska och svenska artiklar aldrig ihop, och varje stapel jämför bara källor från samma del av världen.</p>
   <h3>Lokala källor</h3>
   <p>Lokaltidningar och lokal public service visas under en egen flik per ort. På första sidan räknas de bara in när de skriver om samma händelse som riksmedierna, så att lokala nyheter inte tränger undan de nationella.</p>
   <h3>Uppdatering</h3>
@@ -231,7 +234,7 @@ pre,.scroll{overflow-x:auto}
 <script>
 {
 const LEANS=[[-3,'Långt vänster'],[-2,'Vänster'],[-1,'Lutar vänster'],[0,'Mitten'],[1,'Lutar höger'],[2,'Höger'],[3,'Långt höger']];
-const SHORT={svt:'SVT',sr:'Ekot',altinget:'Altinget',dn:'DN',expressen:'Expressen',gp:'GP',sydsvenskan:'SDS',corren:'Corren',svd:'SvD',di:'Di',nt:'NT',kuriren:'Kuriren',friatider:'Fria Tider',aftonbladet:'AB',arbetet:'Arbetet',nsd:'NSD',arena:'Arena',etc:'ETC',flamman:'Flamman',gd:'GD',arbetarbladet:'Arbetarbladet','svt-gavleborg':'SVT Gävleborg','p4-gavleborg':'P4 Gävleborg'};
+const SHORT={svt:'SVT',sr:'Ekot',altinget:'Altinget',dn:'DN',expressen:'Expressen',gp:'GP',sydsvenskan:'SDS',corren:'Corren',svd:'SvD',di:'Di',nt:'NT',kuriren:'Kuriren',friatider:'Fria Tider',aftonbladet:'AB',arbetet:'Arbetet',nsd:'NSD',arena:'Arena',etc:'ETC',flamman:'Flamman',gd:'GD',arbetarbladet:'Arbetarbladet','svt-gavleborg':'SVT Gävleborg','p4-gavleborg':'P4 Gävleborg',guardian:'Guardian',independent:'Independent',bbc:'BBC',euronews:'Euronews',dw:'DW',telegraph:'Telegraph',dailymail:'Daily Mail',gbnews:'GB News',huffpost:'HuffPost',nyt:'NYT',npr:'NPR',wapo:'WaPo',wsj:'WSJ',thehill:'The Hill',washtimes:'Wash. Times',nypost:'NY Post',foxnews:'Fox News',breitbart:'Breitbart'};
 const BN={v:'Vänster',m:'Mitten',h:'Höger'};
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const safeUrl=u=>/^https:\/\//.test(String(u))?esc(u):'#';
@@ -247,7 +250,9 @@ const shortOf=id=>SHORT[id]||nameOf(id);
 const isReg=id=>!!(SRC[id]&&SRC[id].region);
 const slug=r=>String(r).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 const leanName=id=>{const l=LEANS.find(x=>x[0]===leanOf(id));return l?l[1]:''};
-let REGIONS=[];
+let REGIONS=[],RMETA={};
+const isIntl=r=>!!(RMETA[r]&&RMETA[r].type==='utland');
+const groupOf=id=>{const r=SRC[id]&&SRC[id].region;if(!r)return 0;const i=REGIONS.indexOf(r);return isIntl(r)?1+i:100+i};
 
 function stats(st){
   const ids=[...new Set(st.articles.map(a=>a.s))];
@@ -320,10 +325,10 @@ function renderBlind(){
   document.getElementById('bsH').innerHTML=mk(list.filter(x=>x.s.c.v===0&&x.s.p.h>=0.5));
 }
 function renderSources(){
-  const ids=Object.keys(SRC).sort((a,b)=>(isReg(a)-isReg(b))||SRC[a].lean-SRC[b].lean||nameOf(a).localeCompare(nameOf(b),'sv'));
+  const ids=Object.keys(SRC).sort((a,b)=>groupOf(a)-groupOf(b)||SRC[a].lean-SRC[b].lean||nameOf(a).localeCompare(nameOf(b),'sv'));
   document.getElementById('srcRows').innerHTML=ids.map(id=>{
     const s=SRC[id],l=leanOf(id),k=bucket(l);
-    return `<tr><td><b><a href="${safeUrl(s.url)}" target="_blank" rel="noopener">${esc(s.name)}</a></b><span class="muted">${esc(s.type)}${s.region?' · Lokalt, '+esc(s.region):''}</span></td>
+    return `<tr><td><b><a href="${safeUrl(s.url)}" target="_blank" rel="noopener">${esc(s.name)}</a></b><span class="muted">${esc(s.type)}${s.region?(isIntl(s.region)?' · Utland: ':' · Lokalt, ')+esc(s.region):''}</span></td>
     <td><div class="scale" style="--c:var(--${k})" aria-label="${esc(LEANS.find(x=>x[0]===l)[1])}">${LEANS.map(x=>`<i class="${x[0]===l?'on':''}"></i>`).join('')}</div><span class="muted" style="font-size:13px">${esc(LEANS.find(x=>x[0]===l)[1])}${id in OVR?' (din)':''}</span></td>
     <td>${esc(s.label)}</td><td>${esc(s.basis)}</td>
     <td><select data-id="${esc(id)}" aria-label="Din klassning av ${esc(s.name)}">${LEANS.map(x=>`<option value="${x[0]}"${x[0]===l?' selected':''}>${x[1]}</option>`).join('')}</select></td>
@@ -338,8 +343,9 @@ function renderLocal(){
   const multi=list.filter(x=>x.s.n>1).sort((a,b)=>b.s.n-a.s.n||new Date(b.st.updated)-new Date(a.st.updated));
   const singles=list.filter(x=>x.s.n===1).sort((a,b)=>new Date(b.st.updated)-new Date(a.st.updated));
   const count=id=>DATA.stories.reduce((n,st)=>n+st.articles.filter(a=>a.s===id).length,0);
-  el.innerHTML=`<h2>Lokalt: ${esc(region)}</h2>
-  <p class="intro muted">Nyheter från de lokala källorna nedan. Händelser som även riksmedierna skriver om finns också med här, och de lokala källorna räknas då in i stapeln på första sidan.</p>
+  const intro=(RMETA[region]&&RMETA[region].intro)||'Nyheter från de lokala källorna nedan.';
+  el.innerHTML=`<h2>${isIntl(region)?'':'Lokalt: '}${esc(region)}</h2>
+  <p class="intro muted">${esc(intro)}</p>
   <div class="cells" style="margin-bottom:28px">${rs.map(id=>{const na=!SRC[id].inSnapshot;const n=count(id);return `<span class="cell ${bucket(leanOf(id))} ${na?'na':'on'}" style="max-width:220px;flex-basis:150px" title="${esc(leanName(id))}">${esc(nameOf(id))}<small>${esc(leanName(id))} · ${na?'ej hämtad':n+' artiklar'}</small></span>`}).join('')}</div>
   ${multi.length?`<h3 style="margin:0 0 14px">Flera källor rapporterar</h3><div class="grid">${multi.map(x=>card(x.st,x.s)).join('')}</div>`:`<p class="empty">Ingen lokal händelse har ännu tagits upp av mer än en källa.</p>`}
   ${singles.length?`<section class="singles"><h2>Bara en källa har rapporterat</h2><ul>${singles.map(x=>{const id=x.s.ids[0];const a=x.st.articles[0];return `<li><span class="tag ${bucket(leanOf(id))}">${esc(shortOf(id))}</span><a href="${safeUrl(a.u)}" target="_blank" rel="noopener">${esc(x.st.title)}</a></li>`}).join('')}</ul></section>`:''}`;
@@ -370,7 +376,9 @@ document.addEventListener('error',e=>{const f=e.target&&e.target.closest&&e.targ
 
 fetch('news.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error(r.status);return r.json()}).then(d=>{
   DATA=d;d.sources.forEach(s=>{SRC[s.id]=s});
-  REGIONS=[...new Set(d.sources.map(s=>s.region).filter(Boolean))];
+  RMETA=(d.regions&&typeof d.regions==='object')?d.regions:{};
+  const used=new Set(d.sources.map(s=>s.region).filter(Boolean));
+  REGIONS=[...Object.keys(RMETA).filter(r=>used.has(r)),...[...used].filter(r=>!(r in RMETA))];
   const first=document.querySelector('nav a[data-v="nyheter"]');
   REGIONS.slice().reverse().forEach(r=>{const a=document.createElement('a');a.href='#lokalt-'+slug(r);a.dataset.v='lokalt-'+slug(r);a.textContent=r;first.after(a)});
   Object.keys(OVR).forEach(k=>{if(!SRC[k]||!LEANS.some(l=>l[0]===OVR[k]))delete OVR[k]});
