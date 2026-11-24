@@ -82,6 +82,13 @@ h3{font:600 22px/1.2 var(--serif);margin:0;text-wrap:balance}
 /* kort */
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 40px}
 .card{padding-bottom:22px;border-bottom:1px solid var(--line)}
+.ph{margin:0 0 12px}
+.ph a{display:block;aspect-ratio:16/9;overflow:hidden;border-radius:4px;background:var(--panel)}
+.ph img{width:100%;height:100%;object-fit:cover;display:block}
+.ph figcaption{font-size:12px;color:var(--muted);margin-top:4px}
+.leadside{display:flex;flex-direction:column;gap:18px}
+.lead .strip{margin-top:22px}
+.lead>.strip{margin-top:0}
 .card .sum{margin:6px 0 0;font-size:16px}
 .srcs{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
 .tag{font-size:12px;font-weight:600;padding:2px 7px;border-radius:3px;background:var(--t);color:var(--c);white-space:nowrap}
@@ -119,6 +126,13 @@ select{font:15px var(--sans);min-height:44px;padding:0 8px;border:1px solid var(
 footer{border-top:1px solid var(--line);padding:20px 0 40px;font-size:14px;color:var(--muted)}
 pre,.scroll{overflow-x:auto}
 @media(max-width:860px){.lead,.grid,.two{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:860px){
+ .lead{display:flex;flex-direction:column;gap:0}
+ .lead>div:first-child{display:contents}
+ .lead .leadside{order:1;margin:6px 0 10px}
+ .lead .meta,.lead .bar,.lead .legend,.lead .strip{order:2}
+ .lead .strip{margin-top:22px}
+ .lead .leadcmp{order:3;margin-top:16px}}
 @media(max-width:600px){
  .mast .date{margin-left:0;width:100%}
  .compare{grid-template-columns:minmax(0,1fr)}
@@ -205,14 +219,14 @@ pre,.scroll{overflow-x:auto}
   <h3>Det här visar stapeln – och inte</h3>
   <p>Klassningen gäller ledarsidan, inte nyhetsjournalistiken. Svenska nyhetsredaktioner är formellt fristående från ledarredaktionen. Stapeln visar alltså vilka <i>sorters</i> källor som tar upp en händelse, inte att en enskild artikel är vinklad. Varje källa räknas en gång per händelse, oavsett hur många artiklar den skrivit.</p>
   <h3>Gruppering och blinda fläckar</h3>
-  <p>Artiklar grupperas efter hur lika deras rubriker och ingresser är. Metoden är enkel och missar ibland kopplingar, särskilt för ledare och krönikor med kreativa rubriker. En blind fläck är en händelse med minst två källor där minst hälften kommer från ena sidan och ingen från den andra.</p>
+  <p>Artiklar grupperas efter hur lika deras rubriker och ingresser är. Rubriker med olika siffror, till exempel olika priser, hålls isär, och lokala artiklar slås bara ihop med riksmedier eller andra orter när rubrikerna är mycket lika. Metoden är enkel och missar ibland kopplingar, särskilt för ledare och krönikor med kreativa rubriker. En blind fläck är en händelse med minst två källor där minst hälften kommer från ena sidan och ingen från den andra.</p>
   <h3>Lokala källor</h3>
   <p>Lokaltidningar och lokal public service visas under en egen flik per ort. På första sidan räknas de bara in när de skriver om samma händelse som riksmedierna, så att lokala nyheter inte tränger undan de nationella.</p>
   <h3>Uppdatering</h3>
   <p id="runInfo"></p>
  </section>
 </main>
-<footer><div class="wrap">Rubrikerna länkar till originalartiklarna hos respektive källa. Hela bilden visar bara rubriker och länkar.</div></footer>
+<footer><div class="wrap">Rubrikerna länkar till originalartiklarna hos respektive källa. Hela bilden visar rubriker och bilder med länk till originalet. Bilderna visas direkt från respektive källa.</div></footer>
 
 <script>
 {
@@ -262,14 +276,21 @@ function strip(s){
     return `<span class="cell ${bucket(leanOf(id))} ${on?'on':na?'na':'off'}" title="${esc(nameOf(id))} – ${esc(lab?lab[1]:'')}${na?' (saknas i urvalet)':on?' (har rapporterat)':' (har inte rapporterat)'}">${esc(shortOf(id))}<small>${on?'Skrev':na?'Ej hämtad':'–'}</small></span>`}).join('')}</div>
     <div class="striplab"><span>← Vänster</span><span>Mitten</span><span>Höger →</span></div></div>`;
 }
+function figure(st){
+  const im=st.image;
+  if(!im||!/^https:\/\//.test(String(im.u)))return '';
+  const a=st.articles.find(x=>x.s===im.s)||st.articles[0];
+  return `<figure class="ph"><a href="${safeUrl(a.u)}" target="_blank" rel="noopener" tabindex="-1"><img src="${esc(im.u)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a><figcaption>Bild: ${esc(nameOf(im.s))}</figcaption></figure>`;
+}
 function meta(st,s){
   return `<div class="meta"><span>${s.n} ${s.n===1?'källa':'källor'}</span><span>${st.articles.length} ${st.articles.length===1?'artikel':'artiklar'}</span><span>Senast ${esc(fmtDate(st.updated))}</span></div>`;
 }
 function leadHtml(st,s){
-  return `<article class="lead"><div><div class="kicker">Flest källor just nu</div><h2>${esc(st.title)}</h2>${st.summary?`<p class="sum">${esc(st.summary)}</p>`:''}${meta(st,s)}${bar(s)}</div>${strip(s)}<details class="leadcmp"${matchMedia('(min-width:861px)').matches?' open':''}><summary>Jämför rubrikerna</summary>${compare(st)}</details></article>`;
+  const fig=figure(st);
+  return `<article class="lead"><div><div class="kicker">Flest källor just nu</div><h2>${esc(st.title)}</h2>${st.summary?`<p class="sum">${esc(st.summary)}</p>`:''}${meta(st,s)}${bar(s)}${fig?strip(s):''}</div>${fig?`<div class="leadside">${fig}</div>`:strip(s)}<details class="leadcmp"${matchMedia('(min-width:861px)').matches?' open':''}><summary>Jämför rubrikerna</summary>${compare(st)}</details></article>`;
 }
 function card(st,s){
-  return `<article class="card"><h3>${esc(st.title)}</h3>${st.summary?`<p class="sum">${esc(st.summary)}</p>`:''}${bar(s)}${tags(s.ids)}<div class="meta" style="margin-top:8px"><span>${st.articles.length} artiklar</span><span>Senast ${esc(fmtDate(st.updated))}</span></div><details><summary>Jämför rubrikerna</summary>${compare(st)}</details></article>`;
+  return `<article class="card">${figure(st)}<h3>${esc(st.title)}</h3>${st.summary?`<p class="sum">${esc(st.summary)}</p>`:''}${bar(s)}${tags(s.ids)}<div class="meta" style="margin-top:8px"><span>${st.articles.length} artiklar</span><span>Senast ${esc(fmtDate(st.updated))}</span></div><details><summary>Jämför rubrikerna</summary>${compare(st)}</details></article>`;
 }
 function matches(st){
   if(!query)return true;
@@ -345,6 +366,7 @@ document.getElementById('srcRows').addEventListener('change',e=>{
 });
 document.getElementById('reset').addEventListener('click',()=>{OVR={};saveOvr();renderAll();document.getElementById('resetMsg').textContent='Klassningen är återställd.'});
 window.addEventListener('hashchange',route);route();
+document.addEventListener('error',e=>{const f=e.target&&e.target.closest&&e.target.closest('figure.ph');if(f)f.remove()},true);
 
 fetch('news.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error(r.status);return r.json()}).then(d=>{
   DATA=d;d.sources.forEach(s=>{SRC[s.id]=s});
