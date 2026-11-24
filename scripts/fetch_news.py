@@ -27,6 +27,9 @@ redan mest själv deras dess hans hennes vår våra er ni oss dem dom denna dett
 vilket någon något några ingen inget inga varje samma sådan mitt ditt min din sina sitt uppgifter
 live analys ledare krönika debatt replik slutreplik video bilder se här kl efter så nu dag dagen
 stor stort stora gick
+the and for with from that this was were are has have had its his her their they them you your our
+not but all any can will would could should after before over under into onto about than then also
+just more most new says said say amid what who why how when where which while out off per via
 """.split())
 PARTIES = {"s", "v", "c", "l", "m", "kd", "sd", "mp"}
 WORD = re.compile(r"[a-zåäöéü]+")
@@ -162,12 +165,13 @@ def read_tsv(path):
     return items
 
 
-def cluster(items, scope_of=None, threshold=THRESHOLD, cross=CROSS_THRESHOLD, window_h=48):
+def cluster(items, scope_of=None, intl_of=None, threshold=THRESHOLD, cross=CROSS_THRESHOLD, window_h=48):
     """Inkrementell gruppering: TF-IDF på rubrik (+ ingress). Varje artikel läggs i den
     grupp vars centroid den liknar mest. Två spärrar mot felaktiga ihopslagningar:
     olika siffror sänker likheten, och lokala artiklar kräver högre likhet för att
     hamna ihop med riksmedier eller med en annan ort."""
     scope_of = scope_of or (lambda s: "")
+    intl_of = intl_of or (lambda s: False)  # utländska källor blandas aldrig med svenska
     docs = [Counter(tokens(it["t"] + " " + it["t"] + " " + it.get("x", ""))) for it in items]
     nums = [numbers(it["t"]) for it in items]
     df = Counter()
@@ -185,10 +189,10 @@ def cluster(items, scope_of=None, threshold=THRESHOLD, cross=CROSS_THRESHOLD, wi
     order = sorted(range(n), key=lambda i: items[i]["d"])
     groups = []  # {"members", "centroid", "last", "nums", "scopes"}
     for i in order:
-        v, sc = vecs[i], scope_of(items[i]["s"])
+        v, sc, intl = vecs[i], scope_of(items[i]["s"]), intl_of(items[i]["s"])
         best, best_sim = None, 0.0
         for g in groups:
-            if items[i]["d"] - g["last"] > timedelta(hours=window_h):
+            if items[i]["d"] - g["last"] > timedelta(hours=window_h) or g["intl"] != intl:
                 continue
             sim = sum(x * g["centroid"].get(w, 0.0) for w, x in v.items())
             if nums[i] and g["nums"] and not (nums[i] & g["nums"]):
@@ -207,7 +211,7 @@ def cluster(items, scope_of=None, threshold=THRESHOLD, cross=CROSS_THRESHOLD, wi
             best["scopes"].add(sc)
         else:
             groups.append({"members": [i], "centroid": dict(v), "last": items[i]["d"],
-                           "nums": set(nums[i]), "scopes": {sc}})
+                           "nums": set(nums[i]), "scopes": {sc}, "intl": intl})
     return groups, vecs
 
 
@@ -232,7 +236,10 @@ def add_og_images(stories, limit):
 def build(items, cfg, snapshot=False, note=""):
     lean = {s["id"]: s["lean"] for s in cfg["sources"]}
     region = {s["id"]: s.get("region", "") for s in cfg["sources"]}
-    groups, vecs = cluster(items, scope_of=lambda s: region.get(s, ""), window_h=cfg.get("window_hours", 48))
+    regions = cfg.get("regions", {})
+    intl = {s: regions.get(r, {}).get("type") == "utland" for s, r in region.items()}
+    groups, vecs = cluster(items, scope_of=lambda s: region.get(s, ""), intl_of=lambda s: intl.get(s, False),
+                           window_h=cfg.get("window_hours", 48))
     stories = []
     for g in groups:
         mem = g["members"]
@@ -263,6 +270,7 @@ def build(items, cfg, snapshot=False, note=""):
         "generated": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "snapshot": snapshot,
         "note": note,
+        "regions": cfg.get("regions", {}),
         "sources": sources,
         "stories": stories,
     }
