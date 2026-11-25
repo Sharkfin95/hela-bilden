@@ -385,8 +385,8 @@ fetch('news.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error(r.status
   document.getElementById('gen').textContent=(d.snapshot?'Ögonblicksbild ':'Uppdaterad ')+fmtDate(d.generated);
   if(d.note){document.getElementById('noteText').textContent=d.note;document.getElementById('note').hidden=false}
   document.getElementById('runInfo').textContent=d.snapshot
-    ?'Det du ser nu är en ögonblicksbild. I driftsversionen hämtar ett litet skript alla källors RSS-flöden var 30:e minut och bygger om sidan automatiskt.'
-    :'Ett skript hämtar källornas RSS-flöden var 30:e minut och bygger om sidan. Senaste körning: '+fmtDate(d.generated)+'.';
+    ?'Det du ser nu är en ögonblicksbild. I driftsversionen hämtar ett litet skript alla källors RSS-flöden var 10:e minut och bygger om sidan automatiskt.'
+    :'Ett skript hämtar källornas RSS-flöden var 10:e minut och bygger om sidan. Senaste körning: '+fmtDate(d.generated)+'.';
   renderAll();route();
 }).catch(err=>{
   document.getElementById('lead').innerHTML=`<p class="empty">Kunde inte läsa in nyheterna (${esc(err.message)}). Kontrollera att news.json ligger bredvid sidan.</p>`;
