@@ -9,7 +9,7 @@ sources.json                 Källorna: namn, RSS-flöde och politisk placering
 scripts/fetch_news.py        Hämtar flödena, grupperar artiklarna, skriver site/news.json
 site/index.html              Själva sidan (läser news.json)
 site/news.json               Ögonblicksbild från 24 nov 2026 – skrivs över vid första körningen
-.github/workflows/uppdatera.yml   Kör skriptet var 30:e minut och publicerar sidan
+.github/workflows/uppdatera.yml   Kör skriptet var 10:e minut och publicerar sidan
 ```
 
 Ingen server behövs. GitHub Actions hämtar nyheterna och GitHub Pages visar sidan, gratis.
@@ -21,9 +21,19 @@ Ingen server behövs. GitHub Actions hämtar nyheterna och GitHub Pages visar si
 3. Gå till fliken **Actions**, välj **Uppdatera nyheter** och klicka **Run workflow**.
 4. När körningen är klar finns sidan på `https://<ditt-användarnamn>.github.io/hela-bilden/`.
 
-Därefter uppdateras den automatiskt var 30:e minut.
+Därefter uppdateras den automatiskt var 10:e minut.
 
 > GitHub pausar schemalagda körningar i repon som inte haft någon aktivitet på 60 dagar. Gör en liten ändring eller klicka Run workflow igen om det händer.
+
+## Om sidan inte uppdateras
+
+Titta under fliken **Actions**:
+
+- **Grön bock:** körningen gick bra. Ladda om sidan med Ctrl + F5 (Cmd + Shift + R på Mac).
+- **Röd:** något gick fel. Klicka på körningen för att se felet.
+- **Inga nya körningar alls:** GitHub kan försena eller hoppa över schemalagda körningar när det är hög belastning. Klicka **Run workflow** för att köra direkt.
+
+I loggen för steget som kör `fetch_news.py` står varje källa på en egen rad med antal artiklar och hur lång tid hämtningen tog. Rader som börjar med `!` är källor som inte svarade. De hoppas över efter 15 sekunder (`feed_timeout_seconds` i `sources.json`) så att resten av sidan ändå uppdateras. En källa som ofta får `!` kan du stänga av med `"enabled": false`.
 
 ## Testa lokalt
 
