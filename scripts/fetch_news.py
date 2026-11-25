@@ -13,7 +13,9 @@ import json
 import math
 import re
 import sys
+import time
 import urllib.request
+from concurrent.futures import ThreadPoolExecutor
 from collections import Counter
 from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
@@ -35,6 +37,8 @@ PARTIES = {"s", "v", "c", "l", "m", "kd", "sd", "mp"}
 WORD = re.compile(r"[a-zåäöéü]+")
 NUM = re.compile(r"\d+(?:[.,]\d+)?")
 UA = "HelaBilden/1.0 (+RSS-aggregator)"
+FEED_TIMEOUT = 15   # sekunder per flöde; ett flöde som inte svarar hoppas över
+WORKERS = 12        # så många flöden hämtas samtidigt
 
 THRESHOLD = 0.2         # likhet som krävs inom samma område (riks eller en och samma ort)
 CROSS_THRESHOLD = 0.4   # krävs för att blanda lokala källor med riksmedier eller andra orter
@@ -120,34 +124,54 @@ def fetch_og_image(url, timeout=6):
         return None
 
 
-def fetch_feeds(cfg):
+def download(url, timeout):
+    req = urllib.request.Request(url, headers={
+        "User-Agent": UA, "Accept": "application/rss+xml, application/atom+xml, application/xml, text/xml, */*"})
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+        return r.read(5_000_000)
+
+
+def fetch_one(src, timeout):
+    """Hämtar och tolkar ett flöde. Fel och tidsgränser ger en tom lista, aldrig ett stopp."""
     import feedparser  # pip install feedparser
 
+    t0 = time.time()
+    try:
+        data = download(src["feed"], timeout) if src["feed"].startswith("http") else src["feed"]
+        feed = feedparser.parse(data)
+    except Exception as ex:
+        return [], f"kunde inte hämtas ({type(ex).__name__}: {str(ex)[:80]})", time.time() - t0
+    if feed.bozo and not feed.entries:
+        return [], f"kunde inte läsas ({str(getattr(feed, 'bozo_exception', ''))[:80]})", time.time() - t0
     items = []
-    for src in cfg["sources"]:
-        if src.get("enabled") is False:
+    for e in feed.entries:
+        date = None
+        for key in ("published_parsed", "updated_parsed"):
+            if e.get(key):
+                date = datetime(*e[key][:6], tzinfo=timezone.utc)
+                break
+        title = html.unescape((e.get("title") or "").strip())
+        link = (e.get("link") or "").strip()
+        if not title or not link.startswith("https://") or not date:
             continue
-        feed = feedparser.parse(src["feed"], agent=UA)
-        if feed.bozo and not feed.entries:
-            print(f"! {src['id']}: kunde inte läsa flödet ({feed.bozo_exception})", file=sys.stderr)
-            continue
-        n = pics = 0
-        for e in feed.entries:
-            date = None
-            for key in ("published_parsed", "updated_parsed"):
-                if e.get(key):
-                    date = datetime(*e[key][:6], tzinfo=timezone.utc)
-                    break
-            title = html.unescape((e.get("title") or "").strip())
-            link = (e.get("link") or "").strip()
-            if not title or not link.startswith("https://") or not date:
-                continue
-            desc = re.sub(r"<[^>]+>", " ", e.get("summary") or "")
-            img = image_of(e)
-            items.append({"s": src["id"], "t": title, "u": link, "d": date, "x": desc[:400], "i": img})
-            n += 1
-            pics += bool(img)
-        print(f"  {src['id']}: {n} artiklar, {pics} med bild", file=sys.stderr)
+        desc = re.sub(r"<[^>]+>", " ", e.get("summary") or "")
+        items.append({"s": src["id"], "t": title, "u": link, "d": date, "x": desc[:400], "i": image_of(e)})
+    return items, None, time.time() - t0
+
+
+def fetch_feeds(cfg):
+    timeout = cfg.get("feed_timeout_seconds", FEED_TIMEOUT)
+    sources = [s for s in cfg["sources"] if s.get("enabled") is not False]
+    with ThreadPoolExecutor(max_workers=WORKERS) as pool:
+        results = list(pool.map(lambda src: fetch_one(src, timeout), sources))
+    items = []
+    for src, (got, err, secs) in zip(sources, results):
+        if err:
+            print(f"! {src['id']}: {err} [{secs:.1f} s]", file=sys.stderr)
+        else:
+            pics = sum(1 for it in got if it["i"])
+            print(f"  {src['id']}: {len(got)} artiklar, {pics} med bild [{secs:.1f} s]", file=sys.stderr)
+        items += got
     return items
 
 
@@ -216,21 +240,17 @@ def cluster(items, scope_of=None, intl_of=None, threshold=THRESHOLD, cross=CROSS
 
 
 def add_og_images(stories, limit):
-    """Hämtar delningsbild för händelser som saknar bild – flest källor först, högst `limit` sidor."""
+    """Hämtar delningsbild för händelser som saknar bild – flest källor först, högst `limit` sidor, parallellt."""
     todo = sorted((s for s in stories if not s.get("image")),
                   key=lambda s: -len({a["s"] for a in s["articles"]}))
-    tried = 0
-    for st in todo:
-        for a in st["articles"][:2]:
-            if tried >= limit:
-                return tried
-            tried += 1
-            img = fetch_og_image(a["u"])
-            if img:
-                a["i"] = img
-                st["image"] = {"u": img, "s": a["s"]}
-                break
-    return tried
+    pairs = [(st, a) for st in todo for a in st["articles"][:2]][:limit]
+    with ThreadPoolExecutor(max_workers=8) as pool:
+        imgs = list(pool.map(lambda p: fetch_og_image(p[1]["u"]), pairs))
+    for (st, a), img in zip(pairs, imgs):
+        if img and not st.get("image"):
+            a["i"] = img
+            st["image"] = {"u": img, "s": a["s"]}
+    return len(pairs)
 
 
 def build(items, cfg, snapshot=False, note=""):
@@ -283,6 +303,7 @@ def main():
     ap.add_argument("--items", help="läs artiklar från TSV i stället för att hämta flöden")
     args = ap.parse_args()
 
+    t0 = time.time()
     with open(args.sources, encoding="utf-8") as f:
         cfg = json.load(f)
 
@@ -312,7 +333,7 @@ def main():
     multi = sum(1 for s in data["stories"] if len({a["s"] for a in s["articles"]}) > 1)
     pics = sum(1 for s in data["stories"] if s.get("image"))
     print(f"Klart: {len(unique)} artiklar, {len(data['stories'])} händelser ({multi} med flera källor, "
-          f"{pics} med bild) -> {args.out}", file=sys.stderr)
+          f"{pics} med bild) -> {args.out} på {time.time() - t0:.0f} s", file=sys.stderr)
 
 
 if __name__ == "__main__":
