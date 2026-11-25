@@ -2,8 +2,8 @@ name: Uppdatera nyheter
 
 on:
   schedule:
-    - cron: "3-59/10 * * * *"   # var 30:e minut (UTC)
-  workflow_dispatch:          # kör manuellt från fliken Actions
+    - cron: "3-59/10 * * * *"   # var 10:e minut (:03, :13, :23 …), inte på hel timme då GitHub är som mest belastat
+  workflow_dispatch:              # kör manuellt från fliken Actions
   push:
     branches: [main]
 
@@ -12,13 +12,15 @@ permissions:
   pages: write
   id-token: write
 
+# En körning i taget. En pågående körning avbryts inte – nästa väntar i kö tills den är klar.
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   bygg:
     runs-on: ubuntu-latest
+    timeout-minutes: 10           # hänger något avbryts körningen, i stället för att blockera kön i timmar
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -33,6 +35,7 @@ jobs:
   publicera:
     needs: bygg
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
